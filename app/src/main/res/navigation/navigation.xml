@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/launchFragment">
+
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.example.mynotifactiondemo.ui.MainActivity"
+        android:label="activity_main"
+        tools:layout="@layout/activity_main" />
+    <fragment
+        android:id="@+id/launchFragment"
+        android:name="com.example.mynotifactiondemo.ui.LaunchFragment"
+        android:label="fragment_launch"
+        tools:layout="@layout/fragment_launch" >
+        <action
+            android:id="@+id/action_launchFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.mynotifactiondemo.ui.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_limitsListFragment"
+            app:destination="@id/limitsListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/limitsListFragment"
+        android:name="com.example.mynotifactiondemo.ui.limits.LimitsListFragment"
+        android:label="fragment_limits_list"
+        tools:layout="@layout/fragment_limits_list" />
+</navigation>
