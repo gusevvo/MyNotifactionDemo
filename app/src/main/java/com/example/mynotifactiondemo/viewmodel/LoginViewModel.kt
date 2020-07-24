@@ -9,4 +9,8 @@ class LoginViewModel : ViewModel() {
         UNAUTHENTICATED,
         INVALID_AUTHENTICATION
     }
+
+    private fun f() {
+
+    }
 }

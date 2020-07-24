@@ -7,19 +7,21 @@
     android:layout_height="match_parent"
     tools:context=".ui.LoginFragment">
 
-    <Button
-        android:id="@+id/fragment_login_button_login"
-        style="@style/button"
+
+    <TextView
+        android:id="@+id/textView"
+        style="@style/title"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp"
-        android:text="Войти"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="Войти в систему"
+        app:layout_constraintBottom_toTopOf="@+id/userEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userPassword" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <EditText
         android:id="@+id/userEmail"
@@ -30,7 +32,7 @@
         android:ems="10"
         android:hint="Введите телефон или почту"
         android:importantForAutofill="no"
-        android:inputType="textEmailAddress|phone"
+        android:inputType="textEmailAddress"
         app:layout_constraintBottom_toTopOf="@+id/userPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -54,18 +56,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userEmail" />
 
-    <TextView
-        android:id="@+id/textView"
-        style="@style/title"
+    <Button
+        android:id="@+id/fragment_login_button_login"
+        style="@style/button"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp"
-        android:text="Войти в систему"
-        app:layout_constraintBottom_toTopOf="@+id/userEmail"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:text="Войти"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintTop_toBottomOf="@+id/userPassword" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
