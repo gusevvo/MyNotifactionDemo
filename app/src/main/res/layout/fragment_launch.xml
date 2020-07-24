@@ -8,7 +8,7 @@ tools:context=".ui.LaunchFragment">
 
 <Button
     style="@style/button"
-    android:id="@+id/fragment_launch_button_login"
+    android:id="@+id/fragment_launch_button_next"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:text="Далее"

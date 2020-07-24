@@ -22,7 +22,7 @@ class LaunchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        fragment_launch_button_login.setOnClickListener {  view: View ->
+        fragment_launch_button_next.setOnClickListener {  view: View ->
             view.findNavController().navigate(R.id.action_launchFragment_to_loginFragment)
         }
     }
