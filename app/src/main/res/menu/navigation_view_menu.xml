@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_cargo"
+            android:icon="@drawable/ic_cargo"
+            android:title="Грузы" />
+        <item
+            android:id="@+id/nav_limit"
+            android:icon="@drawable/ic_fueling"
+            android:title="Лимиты" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_logout"
+            android:title="Выйти" />
+    </group>
+</menu>

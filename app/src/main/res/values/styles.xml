@@ -25,4 +25,14 @@
         <item name="android:textSize">14sp</item>
     </style>
 
+
+    <style name="h5_white">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="h6_grey">
+        <item name="android:textColor">@color/colorGrey</item>
+        <item name="android:textSize">12sp</item>
+    </style>
 </resources>
