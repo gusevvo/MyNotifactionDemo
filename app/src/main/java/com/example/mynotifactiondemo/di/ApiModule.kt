@@ -1,12 +1,15 @@
 package com.example.mynotifactiondemo.di
 
+import android.webkit.CookieManager
 import com.example.mynotifactiondemo.BuildConfig
 import com.example.mynotifactiondemo.data.api.ApiClientInterface
-import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
+import okhttp3.Cookie
+import okhttp3.CookieJar
+import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -23,16 +26,39 @@ class ApiModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient() =
+    fun provideOkHttpClient(): OkHttpClient {
+        val builder = OkHttpClient.Builder()
+
+        builder.cookieJar(object: CookieJar {
+            override fun loadForRequest(url: HttpUrl): List<Cookie> {
+                return emptyList()
+            }
+
+            override fun saveFromResponse(url: HttpUrl, cookies: List<Cookie>) {
+                var cookie: Cookie? = null
+                if (url.pathSegments.contains("Login")) {
+                    cookie = cookies.firstOrNull{ it.expiresAt > System.currentTimeMillis() }
+                } else if (url.pathSegments.contains("Logout")) {
+                    cookie = cookies.firstOrNull{ it.expiresAt <= System.currentTimeMillis() }
+                }
+                if (cookie != null) {
+                    val cookieManager = CookieManager.getInstance();
+                    cookieManager.setCookie(cookie.domain, cookie.toString())
+                }
+            }
+        })
+
+
         if (BuildConfig.DEBUG) {
-            val loggingInterceptor = HttpLoggingInterceptor()
-            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
-            OkHttpClient.Builder()
-                .addInterceptor(loggingInterceptor)
-                .build()
-        } else OkHttpClient
-            .Builder()
-            .build()
+            val loggingInterceptor = HttpLoggingInterceptor().apply {
+                setLevel(HttpLoggingInterceptor.Level.BODY)
+            }
+            builder.addInterceptor(loggingInterceptor)
+        }
+
+        return builder.build()
+    }
+
 
 
     @Provides
