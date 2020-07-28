@@ -33,4 +33,9 @@
         android:name="com.example.mynotifactiondemo.ui.limits.LimitsListFragment"
         android:label="fragment_limits_list"
         tools:layout="@layout/fragment_limits_list" />
+    <fragment
+        android:id="@+id/cargoesFragment"
+        android:name="com.example.mynotifactiondemo.ui.cargoes.CargoesFragment"
+        android:label="fragment_cargoes"
+        tools:layout="@layout/fragment_cargoes" />
 </navigation>
