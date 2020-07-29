@@ -7,11 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.mynotifactiondemo.R
 import com.example.mynotifactiondemo.viewmodel.LoginViewModel
+import com.example.mynotifactiondemo.viewmodel.model.ViewModelResult
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_login.*
 
@@ -30,22 +30,49 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        loginViewModel.authenticationState.observe(viewLifecycleOwner, Observer { state ->
-            when (state) {
-                LoginViewModel.AuthenticationStates.AUTHENTICATED -> navigateToLimitsListFragment()
-                LoginViewModel.AuthenticationStates.UNAUTHENTICATED -> Log.e("login", "не аутентифицирован")
-                LoginViewModel.AuthenticationStates.INVALID_AUTHENTICATION -> Log.e("login", "ошибка аутентификации")
+        loginViewModel.authenticationState.observe(viewLifecycleOwner, Observer { result ->
+            when (result.status) {
+                ViewModelResult.Status.SUCCESS -> handleSuccess(result.getValueOrNull()!!)
+                ViewModelResult.Status.FAILURE -> handleFailure(result.getFailureOrNull()!!)
+                ViewModelResult.Status.LOADING -> handleLoading()
             }
         })
 
         fragment_login_button_login.setOnClickListener { this.onLoginClick(it) }
     }
 
+    private fun onLoginClick(view: View) {
+        loginViewModel.login(userEmail.text.toString(), userPassword.text.toString())
+    }
+
+    private fun handleSuccess(state: LoginViewModel.AuthenticationState) {
+        hideProgressBar()
+        when (state) {
+            LoginViewModel.AuthenticationState.AUTHENTICATED -> navigateToLimitsListFragment()
+            LoginViewModel.AuthenticationState.UNAUTHENTICATED -> Log.w("login", "Пользователь не аутентифицирован")
+        }
+    }
+
+    private fun handleFailure(failure: ViewModelResult.Failure) {
+        hideProgressBar()
+        Log.e("login", "Ошибка аутентификации", failure.throwable)
+    }
+
+    private fun handleLoading() {
+        showProgressBar()
+    }
+
     private fun navigateToLimitsListFragment() {
         findNavController().navigate(R.id.action_loginFragment_to_limitsListFragment)
     }
 
-    private fun onLoginClick(view: View) {
-        loginViewModel.login(userEmail.text.toString(), userPassword.text.toString())
+    private fun showProgressBar() {
+        loginnGroup.visibility = View.GONE
+        progressBar.visibility = View.VISIBLE
+    }
+
+    private fun hideProgressBar() {
+        loginnGroup.visibility = View.VISIBLE
+        progressBar.visibility = View.GONE
     }
 }
