@@ -12,7 +12,6 @@ class LimitsListAdapter(private val limitItems: List<LimitListItemModel>)
 
     class LimitHolder(v: View): RecyclerView.ViewHolder(v) {
         private var view: View = v
-        private var photo: LimitListItemModel? = null
 
         fun bind(limit: LimitListItemModel) {
             view.limit_name.text = limit.name
