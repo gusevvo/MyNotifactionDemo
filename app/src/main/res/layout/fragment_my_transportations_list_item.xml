@@ -57,11 +57,15 @@
 
     <TextView
         android:id="@+id/loading_operation_number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/h5_primary_dark"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
+        android:background="@drawable/ic_yellow_circle"
+        android:gravity="center_horizontal"
+        android:textAlignment="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider"
         tools:text="1" />
@@ -117,7 +121,7 @@
 
     <View
         android:id="@+id/divider"
-        android:layout_width="358dp"
+        android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="8dp"
         android:background="?android:attr/listDivider"
@@ -127,25 +131,41 @@
 
     <TextView
         android:id="@+id/unloading_operation_number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/h5_white"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:background="@drawable/ic_primary_dark_circle"
+        android:gravity="center_horizontal"
+        android:textAlignment="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/city_unloading"
         tools:text="3" />
 
     <View
         android:id="@+id/divider2"
-        android:layout_width="358dp"
+        android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="8dp"
         android:background="?android:attr/listDivider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/date_unloading" />
+
+    <View
+        android:id="@+id/divider3"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/unloading_operation_number"
+        app:layout_constraintEnd_toEndOf="@+id/loading_operation_number"
+        app:layout_constraintStart_toStartOf="@+id/loading_operation_number"
+        app:layout_constraintTop_toBottomOf="@+id/loading_operation_number" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
