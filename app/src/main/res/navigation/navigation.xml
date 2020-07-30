@@ -27,6 +27,9 @@
         <action
             android:id="@+id/action_loginFragment_to_limitsListFragment"
             app:destination="@id/limitsListFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_myTransportationsFragment"
+            app:destination="@id/myTransportationsFragment" />
     </fragment>
     <fragment
         android:id="@+id/limitsListFragment"
@@ -38,4 +41,9 @@
         android:name="com.example.mynotifactiondemo.ui.cargoes.CargoesFragment"
         android:label="fragment_cargoes"
         tools:layout="@layout/fragment_cargoes" />
+    <fragment
+        android:id="@+id/myTransportationsFragment"
+        android:name="com.example.mynotifactiondemo.ui.cargoes.own.MyTransportationsFragment"
+        android:label="fragment_my_transportations"
+        tools:layout="@layout/fragment_my_transportations" />
 </navigation>

@@ -37,8 +37,8 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_cargoes -> {
                     findNavController(R.id.nav_host_fragment).navigate(R.id.cargoesFragment)
                 }
-                R.id.nav_own_cargoes -> {
-                    findNavController(R.id.nav_host_fragment).navigate(R.id.limitsListFragment)
+                R.id.nav_my_transportations -> {
+                    findNavController(R.id.nav_host_fragment).navigate(R.id.myTransportationsFragment)
                 }
                 R.id.nav_logout -> {
                     loginViewModel.logout()

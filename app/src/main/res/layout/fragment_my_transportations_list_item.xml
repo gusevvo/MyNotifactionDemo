@@ -25,7 +25,7 @@
 
     <TextView
         android:id="@+id/status"
-        style="@style/h6_red"
+        style="@style/h6_grey"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@+id/number_and_status_change_date"

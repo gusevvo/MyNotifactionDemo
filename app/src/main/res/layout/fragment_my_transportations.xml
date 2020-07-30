@@ -5,7 +5,7 @@
     android:id="@+id/fragment_cargoes_own"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.cargoes.CargoesOwnFragment">
+    tools:context=".ui.cargoes.own.MyTransportationsFragment">
 
     <TextView
         android:id="@+id/fragment_cargoes_own_total_items_count"
@@ -22,7 +22,7 @@
         tools:text="Всего 84 перевозки" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/cargoes_own_recycler_view"
+        android:id="@+id/transportations_recycler_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scrollbars="vertical"

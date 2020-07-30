@@ -6,7 +6,7 @@
             android:icon="@drawable/ic_cargo"
             android:title="Грузы" />
         <item
-            android:id="@+id/nav_own_cargoes"
+            android:id="@+id/nav_my_transportations"
             android:icon="@drawable/ic_own_cargoes"
             android:title="Мои перевозки" />
         <item
