@@ -2,13 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_cargo"
+            android:id="@+id/nav_cargoes"
             android:icon="@drawable/ic_cargo"
             android:title="Грузы" />
         <item
-            android:id="@+id/nav_limit"
-            android:icon="@drawable/ic_fueling"
-            android:title="Лимиты" />
+            android:id="@+id/nav_my_transportations"
+            android:icon="@drawable/ic_own_cargoes"
+            android:title="Мои перевозки" />
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/ic_logout"

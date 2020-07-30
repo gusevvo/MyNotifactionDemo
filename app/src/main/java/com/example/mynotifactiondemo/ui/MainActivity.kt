@@ -34,11 +34,11 @@ class MainActivity : AppCompatActivity() {
             drawer_layout.closeDrawers()
 
             when (menuItem.itemId) {
-                R.id.nav_cargo -> {
+                R.id.nav_cargoes -> {
                     findNavController(R.id.nav_host_fragment).navigate(R.id.cargoesFragment)
                 }
-                R.id.nav_limit -> {
-                    findNavController(R.id.nav_host_fragment).navigate(R.id.limitsListFragment)
+                R.id.nav_my_transportations -> {
+                    findNavController(R.id.nav_host_fragment).navigate(R.id.myTransportationsFragment)
                 }
                 R.id.nav_logout -> {
                     loginViewModel.logout()

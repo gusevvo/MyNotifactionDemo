@@ -29,20 +29,29 @@ class ApiModule {
     fun provideOkHttpClient(): OkHttpClient {
         val builder = OkHttpClient.Builder()
 
-        builder.cookieJar(object: CookieJar {
+        builder.cookieJar(object : CookieJar {
             override fun loadForRequest(url: HttpUrl): List<Cookie> {
-                return emptyList()
+                val cookieList = mutableListOf<Cookie>()
+                val cookie = CookieManager.getInstance().getCookie(url.toString())
+                val cookieParts = cookie.split("[,;]")
+                for (part in cookieParts) {
+                    val parsed = Cookie.parse(url, part.trim())
+                    if (parsed != null) {
+                        cookieList.add(parsed)
+                    }
+                }
+                return cookieList
             }
 
             override fun saveFromResponse(url: HttpUrl, cookies: List<Cookie>) {
                 var cookie: Cookie? = null
                 if (url.pathSegments.contains("Login")) {
-                    cookie = cookies.firstOrNull{ it.expiresAt > System.currentTimeMillis() }
+                    cookie = cookies.firstOrNull { it.expiresAt > System.currentTimeMillis() }
                 } else if (url.pathSegments.contains("Logout")) {
-                    cookie = cookies.firstOrNull{ it.expiresAt <= System.currentTimeMillis() }
+                    cookie = cookies.firstOrNull { it.expiresAt <= System.currentTimeMillis() }
                 }
                 if (cookie != null) {
-                    val cookieManager = CookieManager.getInstance();
+                    val cookieManager = CookieManager.getInstance()
                     cookieManager.setCookie(cookie.domain, cookie.toString())
                 }
             }
@@ -60,7 +69,6 @@ class ApiModule {
     }
 
 
-
     @Provides
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient, BASE_URL: String): Retrofit {
@@ -75,7 +83,8 @@ class ApiModule {
 
     @Provides
     @Singleton
-    fun provideApiService(retrofit: Retrofit): ApiClientInterface = retrofit.create(ApiClientInterface::class.java)
+    fun provideApiService(retrofit: Retrofit): ApiClientInterface =
+        retrofit.create(ApiClientInterface::class.java)
 
 //    @Provides
 //    @Singleton

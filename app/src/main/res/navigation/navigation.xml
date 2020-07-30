@@ -25,17 +25,17 @@
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
-            android:id="@+id/action_loginFragment_to_limitsListFragment"
-            app:destination="@id/limitsListFragment" />
+            android:id="@+id/action_loginFragment_to_myTransportationsFragment"
+            app:destination="@id/myTransportationsFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/limitsListFragment"
-        android:name="com.example.mynotifactiondemo.ui.limits.LimitsListFragment"
-        android:label="fragment_limits_list"
-        tools:layout="@layout/fragment_limits_list" />
     <fragment
         android:id="@+id/cargoesFragment"
         android:name="com.example.mynotifactiondemo.ui.cargoes.CargoesFragment"
         android:label="fragment_cargoes"
         tools:layout="@layout/fragment_cargoes" />
+    <fragment
+        android:id="@+id/myTransportationsFragment"
+        android:name="com.example.mynotifactiondemo.ui.cargoes.own.MyTransportationsFragment"
+        android:label="fragment_my_transportations"
+        tools:layout="@layout/fragment_my_transportations" />
 </navigation>

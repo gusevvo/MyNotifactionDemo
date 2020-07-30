@@ -48,7 +48,7 @@ class LoginFragment : Fragment() {
     private fun handleSuccess(state: LoginViewModel.AuthenticationState) {
         hideProgressBar()
         when (state) {
-            LoginViewModel.AuthenticationState.AUTHENTICATED -> navigateToLimitsListFragment()
+            LoginViewModel.AuthenticationState.AUTHENTICATED -> navigateToMyTransportations()
             LoginViewModel.AuthenticationState.UNAUTHENTICATED -> Log.w("login", "Пользователь не аутентифицирован")
         }
     }
@@ -62,8 +62,8 @@ class LoginFragment : Fragment() {
         showProgressBar()
     }
 
-    private fun navigateToLimitsListFragment() {
-        findNavController().navigate(R.id.action_loginFragment_to_limitsListFragment)
+    private fun navigateToMyTransportations() {
+        findNavController().navigate(R.id.action_loginFragment_to_myTransportationsFragment)
     }
 
     private fun showProgressBar() {

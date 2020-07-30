@@ -4,10 +4,12 @@ import android.content.Context
 import android.content.SharedPreferences
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * see: https://acomputerengineer.com/2020/02/11/sharedpreferences-in-android-kotlin-with-how-to-remember-user-login-session-example/
  */
+@Singleton
 class UserCredentialsPreferences @Inject constructor(
     @ApplicationContext private val context: Context
 ) {
@@ -19,7 +21,7 @@ class UserCredentialsPreferences @Inject constructor(
     }
 
     private val usernameKeyValue = KeyDefaultValuePair("username", "")
-    private val passwordKeyValue = KeyDefaultValuePair("username", "")
+    private val passwordKeyValue = KeyDefaultValuePair("password", "")
 
     private val preferences: SharedPreferences
 
