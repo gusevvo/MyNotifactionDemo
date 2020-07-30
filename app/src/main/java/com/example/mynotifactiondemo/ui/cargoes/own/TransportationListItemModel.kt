@@ -1,13 +1,11 @@
 package com.example.mynotifactiondemo.ui.cargoes.own
 
-import java.util.*
-
 data class TransportationListItemModel(
-    val id: UUID,
+    val id: String,
+    val status: Int,
     val numberAndStatusChangeDate: String,
     val cost: String,
     val costWithoutVat: String,
-    val status: Int,
     val statusText: String,
     val cityLoading: String,
     val cityUnloading: String,

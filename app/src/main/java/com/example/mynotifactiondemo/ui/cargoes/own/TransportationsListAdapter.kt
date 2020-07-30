@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mynotifactiondemo.R
 import kotlinx.android.synthetic.main.fragment_my_transportations_list_item.view.*
 
-class TransportationsListAdapter(private val transportations: List<TransportationListItemModel>) :
+class TransportationsListAdapter(private val transportations: MutableList<TransportationListItemModel>) :
     RecyclerView.Adapter<TransportationsListAdapter.TransportationHolder>() {
 
     class TransportationHolder(v: View) : RecyclerView.ViewHolder(v) {
@@ -48,5 +48,9 @@ class TransportationsListAdapter(private val transportations: List<Transportatio
     override fun onBindViewHolder(holder: TransportationHolder, position: Int) {
         val transportation = transportations[position];
         holder.bind(transportation)
+    }
+
+    fun addData(list: Collection<TransportationListItemModel>) {
+        transportations.addAll(list)
     }
 }
