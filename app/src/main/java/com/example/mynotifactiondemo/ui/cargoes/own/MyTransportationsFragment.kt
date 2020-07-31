@@ -21,48 +21,6 @@ class MyTransportationsFragment : Fragment() {
 
     private val myTransportationsViewModel: MyTransportationsViewModel by viewModels()
     private lateinit var adapter: MyTransportationsListAdapter
-/*
-    private val transportations = listOf(
-        TransportationListItemModel(
-            UUID.randomUUID(),
-            "СП157523/2",
-            "70 000,00 ₽",
-            "58 333,33 ₽ (без НДС)",
-            3,
-            "Требуется переподписание",
-            "Уфа",
-            "Санкт-Петербург",
-            "09.07.2020 08:00",
-            "13.07.2020 22:00",
-            3
-        ),
-        TransportationListItemModel(
-            UUID.randomUUID(),
-            "СП157523/2",
-            "70 000,00 ₽",
-            "58 333,33 ₽ (без НДС)",
-            7,
-            "На исполнении",
-            "Уфа",
-            "Санкт-Петербург",
-            "09.07.2020 08:00",
-            "13.07.2020 22:00",
-            3
-        ),
-        TransportationListItemModel(
-            UUID.randomUUID(),
-            "СП157523/2",
-            "70 000,00 ₽",
-            "58 333,33 ₽ (без НДС)",
-            3,
-            "Требуется переподписание",
-            "Уфа",
-            "Санкт-Петербург",
-            "09.07.2020 08:00",
-            "13.07.2020 22:00",
-            3
-        )
-    )*/
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
