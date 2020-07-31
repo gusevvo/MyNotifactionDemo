@@ -57,7 +57,6 @@ class ApiModule {
             }
         })
 
-
         if (BuildConfig.DEBUG) {
             val loggingInterceptor = HttpLoggingInterceptor().apply {
                 setLevel(HttpLoggingInterceptor.Level.BODY)
@@ -67,7 +66,6 @@ class ApiModule {
 
         return builder.build()
     }
-
 
     @Provides
     @Singleton
@@ -80,13 +78,8 @@ class ApiModule {
             .build()
     }
 
-
     @Provides
     @Singleton
     fun provideApiService(retrofit: Retrofit): ApiClientInterface =
         retrofit.create(ApiClientInterface::class.java)
-
-//    @Provides
-//    @Singleton
-//    fun provideApiHelper(apiHelper: ApiHelperImpl): ApiHelper = apiHelper
 }

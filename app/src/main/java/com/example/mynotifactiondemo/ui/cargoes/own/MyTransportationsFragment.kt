@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.fragment_my_transportations.*
 class MyTransportationsFragment : Fragment() {
 
     private val myTransportationsViewModel: MyTransportationsViewModel by viewModels()
-    private lateinit var adapter: TransportationsListAdapter
+    private lateinit var adapter: MyTransportationsListAdapter
 /*
     private val transportations = listOf(
         TransportationListItemModel(
@@ -81,7 +81,7 @@ class MyTransportationsFragment : Fragment() {
     }
 
     private fun setupUI() {
-        adapter = TransportationsListAdapter(arrayListOf())
+        adapter = MyTransportationsListAdapter(arrayListOf())
         transportations_recycler_view.adapter = adapter
         transportations_recycler_view.layoutManager = LinearLayoutManager(activity)
 //        transportations_recycler_view.apply {
@@ -101,7 +101,7 @@ class MyTransportationsFragment : Fragment() {
     }
 
     private fun handleSuccess(myTransportations: MyTransportationsResponseDto) {
-        val models = myTransportations.items.map { TransportationListItemModel(
+        val models = myTransportations.items.map { MyTransportationListItemModel(
             id = it.id,
             status = it.status,
             numberAndStatusChangeDate = "${it.number} от ${it.statusChangeTime}",
