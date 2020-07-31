@@ -67,12 +67,12 @@ class LoginFragment : Fragment() {
     }
 
     private fun showProgressBar() {
-        loginnGroup.visibility = View.GONE
+        loginGroup.visibility = View.GONE
         progressBar.visibility = View.VISIBLE
     }
 
     private fun hideProgressBar() {
-        loginnGroup.visibility = View.VISIBLE
+        loginGroup.visibility = View.VISIBLE
         progressBar.visibility = View.GONE
     }
 }
