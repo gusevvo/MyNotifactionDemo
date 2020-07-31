@@ -20,49 +20,7 @@ import kotlinx.android.synthetic.main.fragment_my_transportations.*
 class MyTransportationsFragment : Fragment() {
 
     private val myTransportationsViewModel: MyTransportationsViewModel by viewModels()
-    private lateinit var adapter: TransportationsListAdapter
-/*
-    private val transportations = listOf(
-        TransportationListItemModel(
-            UUID.randomUUID(),
-            "СП157523/2",
-            "70 000,00 ₽",
-            "58 333,33 ₽ (без НДС)",
-            3,
-            "Требуется переподписание",
-            "Уфа",
-            "Санкт-Петербург",
-            "09.07.2020 08:00",
-            "13.07.2020 22:00",
-            3
-        ),
-        TransportationListItemModel(
-            UUID.randomUUID(),
-            "СП157523/2",
-            "70 000,00 ₽",
-            "58 333,33 ₽ (без НДС)",
-            7,
-            "На исполнении",
-            "Уфа",
-            "Санкт-Петербург",
-            "09.07.2020 08:00",
-            "13.07.2020 22:00",
-            3
-        ),
-        TransportationListItemModel(
-            UUID.randomUUID(),
-            "СП157523/2",
-            "70 000,00 ₽",
-            "58 333,33 ₽ (без НДС)",
-            3,
-            "Требуется переподписание",
-            "Уфа",
-            "Санкт-Петербург",
-            "09.07.2020 08:00",
-            "13.07.2020 22:00",
-            3
-        )
-    )*/
+    private lateinit var adapter: MyTransportationsListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -81,7 +39,7 @@ class MyTransportationsFragment : Fragment() {
     }
 
     private fun setupUI() {
-        adapter = TransportationsListAdapter(arrayListOf())
+        adapter = MyTransportationsListAdapter(arrayListOf())
         transportations_recycler_view.adapter = adapter
         transportations_recycler_view.layoutManager = LinearLayoutManager(activity)
 //        transportations_recycler_view.apply {
@@ -101,7 +59,7 @@ class MyTransportationsFragment : Fragment() {
     }
 
     private fun handleSuccess(myTransportations: MyTransportationsResponseDto) {
-        val models = myTransportations.items.map { TransportationListItemModel(
+        val models = myTransportations.items.map { MyTransportationListItemModel(
             id = it.id,
             status = it.status,
             numberAndStatusChangeDate = "${it.number} от ${it.statusChangeTime}",

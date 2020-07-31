@@ -28,11 +28,11 @@ class ApiModule {
     @Singleton
     fun provideOkHttpClient(): OkHttpClient {
         val builder = OkHttpClient.Builder()
-
+        builder.followRedirects(false)
         builder.cookieJar(object : CookieJar {
             override fun loadForRequest(url: HttpUrl): List<Cookie> {
                 val cookieList = mutableListOf<Cookie>()
-                val cookie = CookieManager.getInstance().getCookie(url.toString())
+                val cookie = CookieManager.getInstance().getCookie(url.toString()) ?: ""
                 val cookieParts = cookie.split("[,;]")
                 for (part in cookieParts) {
                     val parsed = Cookie.parse(url, part.trim())
@@ -57,7 +57,6 @@ class ApiModule {
             }
         })
 
-
         if (BuildConfig.DEBUG) {
             val loggingInterceptor = HttpLoggingInterceptor().apply {
                 setLevel(HttpLoggingInterceptor.Level.BODY)
@@ -67,7 +66,6 @@ class ApiModule {
 
         return builder.build()
     }
-
 
     @Provides
     @Singleton
@@ -80,13 +78,8 @@ class ApiModule {
             .build()
     }
 
-
     @Provides
     @Singleton
     fun provideApiService(retrofit: Retrofit): ApiClientInterface =
         retrofit.create(ApiClientInterface::class.java)
-
-//    @Provides
-//    @Singleton
-//    fun provideApiHelper(apiHelper: ApiHelperImpl): ApiHelper = apiHelper
 }

@@ -23,7 +23,7 @@ class LoginViewModel @ViewModelInject constructor(
         get() = _authenticationState
 
     init {
-        try {Result
+        try {
             _authenticationState.value =
                 if (usersRepository.isAuthenticated)
                     ViewModelResult.success(AuthenticationState.AUTHENTICATED)
