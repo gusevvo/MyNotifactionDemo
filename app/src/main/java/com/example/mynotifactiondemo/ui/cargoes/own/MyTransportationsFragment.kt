@@ -1,26 +1,32 @@
 package com.example.mynotifactiondemo.ui.cargoes.own
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
+import androidx.paging.map
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mynotifactiondemo.R
-import com.example.mynotifactiondemo.data.api.dto.MyTransportationsResponseDto
+import com.example.mynotifactiondemo.data.api.dto.MyTransportationsResponseItemDto
 import com.example.mynotifactiondemo.viewmodel.MyTransportationsViewModel
-import com.example.mynotifactiondemo.viewmodel.model.ViewModelResult
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_my_transportations.*
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MyTransportationsFragment : Fragment() {
 
     private val myTransportationsViewModel: MyTransportationsViewModel by viewModels()
-    private lateinit var adapter: MyTransportationsListAdapter
+    private val adapter = MyTransportationsListAdapter()
+    private var fetchMyTrasnportationsJob: Job? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,58 +38,74 @@ class MyTransportationsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupUI()
-        setupObserver()
-
-
+        initUI()
+        getMyTransportations()
     }
 
-    private fun setupUI() {
-        adapter = MyTransportationsListAdapter(arrayListOf())
-        transportations_recycler_view.adapter = adapter
-        transportations_recycler_view.layoutManager = LinearLayoutManager(activity)
-//        transportations_recycler_view.apply {
-//            layoutManager = LinearLayoutManager(activity)
-//            adapter = adapter
-//        }
-    }
+    private fun initUI() {
+        adapter.addLoadStateListener { loadState ->
+            // Only show the list if refresh succeeds.
+            transportations_recycler_view.isVisible = loadState.source.refresh is LoadState.NotLoading
+            // Show loading spinner during initial load or refresh.
+            progress_bar.isVisible = loadState.source.refresh is LoadState.Loading
+            // Show the retry state if initial load or refresh fails.
+            retry_button.isVisible = loadState.source.refresh is LoadState.Error
 
-    private fun setupObserver() {
-        myTransportationsViewModel.myTransportations.observe(viewLifecycleOwner, Observer { result ->
-            when (result.status) {
-                ViewModelResult.Status.SUCCESS -> handleSuccess(result.getValueOrNull()!!)
-                ViewModelResult.Status.FAILURE -> handleFailure(result.getFailureOrNull()!!)
-                ViewModelResult.Status.LOADING -> handleLoading()
+            // Toast on any error, regardless of whether it came from RemoteMediator or PagingSource
+            val errorState = loadState.source.append as? LoadState.Error
+                ?: loadState.source.prepend as? LoadState.Error
+                ?: loadState.append as? LoadState.Error
+                ?: loadState.prepend as? LoadState.Error
+            errorState?.let {
+                Toast.makeText(
+                    this.requireContext(),
+                    "\uD83D\uDE28 Wooops ${it.error}",
+                    Toast.LENGTH_LONG
+                ).show()
             }
-        })
+        }
+
+        transportations_recycler_view.adapter = adapter.withLoadStateHeaderAndFooter(
+            header = MyTransportationsLoadStateAdapter { adapter.retry() },
+            footer = MyTransportationsLoadStateAdapter { adapter.retry() }
+        )
+        transportations_recycler_view.layoutManager = LinearLayoutManager(activity)
+
+        retry_button.setOnClickListener { adapter.retry() }
     }
 
-    private fun handleSuccess(myTransportations: MyTransportationsResponseDto) {
-        val models = myTransportations.items.map { MyTransportationListItemModel(
-            id = it.id,
-            status = it.status,
-            numberAndStatusChangeDate = "${it.number} от ${it.statusChangeTime}",
-            cost = it.tariffWithVat.toString(),
-            costWithoutVat = it.tariff.toString(),
-            statusText = "Статус",
-            cityLoading = it.cityLoading,
-            cityUnloading = it.cityUnloading,
-            dateLoading = it.dateLoading,
-            dateUnloading = it.dateUnloading,
-            routeNodesCount = it.routeNodesCount
-        ) }
-        adapter.addData(models)
-        adapter.notifyDataSetChanged()
+    private fun getMyTransportations() {
+        fetchMyTrasnportationsJob?.cancel()
+        fetchMyTrasnportationsJob = lifecycleScope.launch {
+            myTransportationsViewModel.myTransportations.map { pagingData ->
+                pagingData.map { map(it) }
+            }.collectLatest {
+                adapter.submitData(it)
+            }
+        }
+
+        // Scroll to top when the list is refreshed from network.
+        lifecycleScope.launch {
+            adapter.loadStateFlow
+                // Only emit when REFRESH LoadState for RemoteMediator changes.
+                .distinctUntilChangedBy { it.refresh }
+                // Only react to cases where Remote REFRESH completes i.e., NotLoading.
+                .filter { it.refresh is LoadState.NotLoading }
+                .collect { transportations_recycler_view.scrollToPosition(0) }
+        }
     }
 
-    private fun handleFailure(failure: ViewModelResult.Failure) {
-        //hideProgressBar()
-        Log.e("my-transport", "Ошибка аутентификации", failure.throwable)
-    }
-
-    private fun handleLoading() {
-        //showProgressBar()
-        Log.i("my-transport", "Загрузка моего транспорта")
-
-    }
+    private fun map(dto: MyTransportationsResponseItemDto) = MyTransportationListItemModel(
+        id = dto.id,
+        status = dto.status,
+        numberAndStatusChangeDate = "${dto.number} от ${dto.statusChangeTime}",
+        cost = dto.tariffWithVat.toString(),
+        costWithoutVat = dto.tariff.toString(),
+        statusText = "Статус",
+        cityLoading = dto.cityLoading,
+        cityUnloading = dto.cityUnloading,
+        dateLoading = dto.dateLoading,
+        dateUnloading = dto.dateUnloading,
+        routeNodesCount = dto.routeNodesCount
+    )
 }

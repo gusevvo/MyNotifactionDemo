@@ -1,7 +1,11 @@
 package com.example.mynotifactiondemo.data.repository
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import com.example.mynotifactiondemo.data.api.ApiClientInterface
-import com.example.mynotifactiondemo.data.api.dto.MyTransportationsRequestDto
+import com.example.mynotifactiondemo.data.api.dto.MyTransportationsResponseItemDto
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -9,5 +13,17 @@ import javax.inject.Singleton
 class MyTransportationsRepository @Inject constructor(
     private val apiClient: ApiClientInterface
 ) {
-    suspend fun getMyTransportations(requestDto: MyTransportationsRequestDto) = apiClient.getMyTransportations(requestDto)
+    companion object {
+        const val PAGE_SIZE = 10
+    }
+
+    fun getMyTransportations(): Flow<PagingData<MyTransportationsResponseItemDto>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = PAGE_SIZE,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = { MyTransportationsPagingSource(apiClient) }
+        ).flow
+    }
 }

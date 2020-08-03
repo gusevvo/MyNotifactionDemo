@@ -4,12 +4,33 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.paging.LoadState
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mynotifactiondemo.R
 import kotlinx.android.synthetic.main.fragment_my_transportations_list_item.view.*
 
-class MyTransportationsListAdapter(private val myTransportations: MutableList<MyTransportationListItemModel>) :
-    RecyclerView.Adapter<MyTransportationsListAdapter.TransportationHolder>() {
+class MyTransportationsListAdapter() :
+    PagingDataAdapter<MyTransportationListItemModel, MyTransportationsListAdapter.TransportationHolder>(
+        COMPARATOR
+    ) {
+
+    companion object {
+        private val COMPARATOR = object : DiffUtil.ItemCallback<MyTransportationListItemModel>() {
+            override fun areItemsTheSame(
+                oldItem: MyTransportationListItemModel,
+                newItem: MyTransportationListItemModel
+            ): Boolean =
+                oldItem.id == newItem.id
+
+            override fun areContentsTheSame(
+                oldItem: MyTransportationListItemModel,
+                newItem: MyTransportationListItemModel
+            ): Boolean =
+                oldItem == newItem
+        }
+    }
 
     class TransportationHolder(v: View) : RecyclerView.ViewHolder(v) {
         private var view: View = v
@@ -43,14 +64,10 @@ class MyTransportationsListAdapter(private val myTransportations: MutableList<My
         return TransportationHolder(view)
     }
 
-    override fun getItemCount(): Int = myTransportations.size
-
     override fun onBindViewHolder(holder: TransportationHolder, position: Int) {
-        val transportation = myTransportations[position];
-        holder.bind(transportation)
-    }
-
-    fun addData(list: Collection<MyTransportationListItemModel>) {
-        myTransportations.addAll(list)
+        val transportation = getItem(position);
+        if (transportation != null) {
+            holder.bind(transportation)
+        }
     }
 }
