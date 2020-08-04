@@ -1,10 +1,8 @@
 package com.example.mynotifactiondemo.ui.cargoes.own
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.paging.LoadState
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -39,22 +37,14 @@ class MyTransportationsListAdapter() :
             view.number_and_status_change_date.text = myTransportation.numberAndStatusChangeDate
             view.cost.text = myTransportation.cost
             view.cost_without_vat.text = myTransportation.costWithoutVat
-
             view.status.text = myTransportation.statusText
-            view.status.setTextColor(statusToColor(myTransportation.status))
-
+            view.status.setTextColor(myTransportation.statusTextColor)
             view.city_loading.text = myTransportation.cityLoading
             view.city_unloading.text = myTransportation.cityUnloading
             view.date_loading.text = myTransportation.dateLoading
             view.date_unloading.text = myTransportation.dateUnloading
             view.loading_operation_number.text = "1"
             view.unloading_operation_number.text = myTransportation.routeNodesCount.toString()
-        }
-
-        private fun statusToColor(status: Int): Int = when (status) {
-            3 -> Color.RED
-            7 -> Color.BLUE
-            else -> Color.GRAY
         }
     }
 
