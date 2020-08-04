@@ -2,11 +2,11 @@ package com.example.mynotifactiondemo.ui.cargoes.own
 
 data class MyTransportationListItemModel(
     val id: String,
-    val status: Int,
     val numberAndStatusChangeDate: String,
+    val statusText: String,
+    val statusTextColor: Int,
     val cost: String,
     val costWithoutVat: String,
-    val statusText: String,
     val cityLoading: String,
     val cityUnloading: String,
     val dateLoading: String,
