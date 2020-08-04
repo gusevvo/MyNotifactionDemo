@@ -13,6 +13,7 @@ import androidx.paging.LoadState
 import androidx.paging.map
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mynotifactiondemo.R
+import com.example.mynotifactiondemo.common.Mapper
 import com.example.mynotifactiondemo.data.api.dto.MyTransportationsResponseItemDto
 import com.example.mynotifactiondemo.viewmodel.MyTransportationsViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,12 +21,16 @@ import kotlinx.android.synthetic.main.fragment_my_transportations.*
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MyTransportationsFragment : Fragment() {
 
+    @Inject lateinit var mapper: Mapper
+
     private val myTransportationsViewModel: MyTransportationsViewModel by viewModels()
     private val adapter = MyTransportationsListAdapter()
+
     private var fetchMyTrasnportationsJob: Job? = null
 
     override fun onCreateView(
@@ -44,10 +49,13 @@ class MyTransportationsFragment : Fragment() {
 
     private fun initUI() {
         adapter.addLoadStateListener { loadState ->
+
             // Only show the list if refresh succeeds.
             transportations_recycler_view.isVisible = loadState.source.refresh is LoadState.NotLoading
+
             // Show loading spinner during initial load or refresh.
             progress_bar.isVisible = loadState.source.refresh is LoadState.Loading
+
             // Show the retry state if initial load or refresh fails.
             retry_button.isVisible = loadState.source.refresh is LoadState.Error
 
@@ -78,7 +86,7 @@ class MyTransportationsFragment : Fragment() {
         fetchMyTrasnportationsJob?.cancel()
         fetchMyTrasnportationsJob = lifecycleScope.launch {
             myTransportationsViewModel.myTransportations.map { pagingData ->
-                pagingData.map { map(it) }
+                pagingData.map { mapper.map<MyTransportationListItemModel>(it) }
             }.collectLatest {
                 adapter.submitData(it)
             }
@@ -94,18 +102,4 @@ class MyTransportationsFragment : Fragment() {
                 .collect { transportations_recycler_view.scrollToPosition(0) }
         }
     }
-
-    private fun map(dto: MyTransportationsResponseItemDto) = MyTransportationListItemModel(
-        id = dto.id,
-        status = dto.status,
-        numberAndStatusChangeDate = "${dto.number} от ${dto.statusChangeTime}",
-        cost = dto.tariffWithVat.toString(),
-        costWithoutVat = dto.tariff.toString(),
-        statusText = "Статус",
-        cityLoading = dto.cityLoading,
-        cityUnloading = dto.cityUnloading,
-        dateLoading = dto.dateLoading,
-        dateUnloading = dto.dateUnloading,
-        routeNodesCount = dto.routeNodesCount
-    )
 }
