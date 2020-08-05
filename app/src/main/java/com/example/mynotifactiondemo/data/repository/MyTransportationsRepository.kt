@@ -4,6 +4,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.example.mynotifactiondemo.data.api.ApiClientInterface
+import com.example.mynotifactiondemo.data.api.dto.MyTransportationResponseDto
 import com.example.mynotifactiondemo.data.api.dto.MyTransportationsResponseItemDto
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -25,5 +26,9 @@ class MyTransportationsRepository @Inject constructor(
             ),
             pagingSourceFactory = { MyTransportationsPagingSource(apiClient) }
         ).flow
+    }
+
+    suspend fun getMyTransportation(id: String): MyTransportationResponseDto {
+        return apiClient.getMyTransportation(id)
     }
 }
