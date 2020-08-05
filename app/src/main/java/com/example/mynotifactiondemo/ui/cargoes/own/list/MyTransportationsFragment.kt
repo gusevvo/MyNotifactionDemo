@@ -1,4 +1,4 @@
-package com.example.mynotifactiondemo.ui.cargoes.own
+package com.example.mynotifactiondemo.ui.cargoes.own.list
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,12 +9,12 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.paging.map
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mynotifactiondemo.R
 import com.example.mynotifactiondemo.common.Mapper
-import com.example.mynotifactiondemo.data.api.dto.MyTransportationsResponseItemDto
 import com.example.mynotifactiondemo.viewmodel.MyTransportationsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_my_transportations.*
@@ -27,9 +27,14 @@ import javax.inject.Inject
 class MyTransportationsFragment : Fragment() {
 
     @Inject lateinit var mapper: Mapper
-
     private val myTransportationsViewModel: MyTransportationsViewModel by viewModels()
-    private val adapter = MyTransportationsListAdapter()
+
+    private val adapter = MyTransportationsListAdapter( object: MyTransportationsListAdapter.OnListItemClickListener {
+        override fun onListItemClick(id: String) {
+            val action = MyTransportationsFragmentDirections.actionMyTransportationsFragmentToMyTransportationDetailsFragment(id)
+            findNavController().navigate(action)
+        }
+    })
 
     private var fetchMyTrasnportationsJob: Job? = null
 
@@ -86,7 +91,7 @@ class MyTransportationsFragment : Fragment() {
         fetchMyTrasnportationsJob?.cancel()
         fetchMyTrasnportationsJob = lifecycleScope.launch {
             myTransportationsViewModel.myTransportations.map { pagingData ->
-                pagingData.map { mapper.map<MyTransportationListItemModel>(it) }
+                pagingData.map { mapper.map<MyTransportationsListItemModel>(it) }
             }.collectLatest {
                 adapter.submitData(it)
             }

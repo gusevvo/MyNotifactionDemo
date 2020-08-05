@@ -2,14 +2,14 @@ package com.example.mynotifactiondemo.common.mappingprofiles
 
 import com.example.mynotifactiondemo.common.MappingProfileInterface
 import com.example.mynotifactiondemo.data.api.dto.MyTransportationsResponseItemDto
-import com.example.mynotifactiondemo.ui.cargoes.own.MyTransportationListItemModel
+import com.example.mynotifactiondemo.ui.cargoes.own.list.MyTransportationsListItemModel
 import java.lang.IllegalArgumentException
 
 class MyTransportationsResponseItemDtoToMyTransportationListItemModelMappingProfile
-    : MappingProfileInterface<MyTransportationsResponseItemDto, MyTransportationListItemModel> {
+    : MappingProfileInterface<MyTransportationsResponseItemDto, MyTransportationsListItemModel> {
 
     override fun map(source: MyTransportationsResponseItemDto) =
-        MyTransportationListItemModel(
+        MyTransportationsListItemModel(
             id = source.id,
             numberAndStatusChangeDate = "${source.number} от ${source.statusChangeTime}",
             statusText = statusToText(source.status),

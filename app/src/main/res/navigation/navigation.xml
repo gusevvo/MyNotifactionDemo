@@ -35,7 +35,20 @@
         tools:layout="@layout/fragment_cargoes" />
     <fragment
         android:id="@+id/myTransportationsFragment"
-        android:name="com.example.mynotifactiondemo.ui.cargoes.own.MyTransportationsFragment"
+        android:name="com.example.mynotifactiondemo.ui.cargoes.own.list.MyTransportationsFragment"
         android:label="fragment_my_transportations"
-        tools:layout="@layout/fragment_my_transportations" />
+        tools:layout="@layout/fragment_my_transportations" >
+        <action
+            android:id="@+id/action_myTransportationsFragment_to_myTransportationDetailsFragment"
+            app:destination="@id/myTransportationDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/myTransportationDetailsFragment"
+        android:name="com.example.mynotifactiondemo.ui.cargoes.own.details.MyTransportationDetailsFragment"
+        android:label="fragment_my_transportation_details"
+        tools:layout="@layout/fragment_my_transportation_details" >
+        <argument
+            android:name="id"
+            app:argType="string" />
+    </fragment>
 </navigation>

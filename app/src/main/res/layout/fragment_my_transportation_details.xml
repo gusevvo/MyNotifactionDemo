@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_cargoes_own_transportations_details"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.cargoes.own.details.MyTransportationDetailsFragment">
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+            <TextView
+                android:id="@+id/order_number"
+                style="@style/h1_primary_dark"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="16dp"
+                android:paddingTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Заявка №ЗП-67498" />
+
+            <TextView
+                android:id="@+id/order_date"
+                style="@style/h1_primary_dark"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/order_number"
+                tools:text="от 24.05.2020 22:00" />
+
+            <TextView
+                android:id="@+id/contract_number_and_date"
+                style="@style/h7_grey"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="16dp"
+                android:paddingTop="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/order_date"
+                tools:text="к договору №815-2017-ОЛ/МО-П от 16.08.2017" />
+
+            <TextView
+                android:id="@+id/order_status"
+                style="@style/h7_grey"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="16dp"
+                android:paddingTop="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/contract_number_and_date"
+                tools:text="Требуется переподписание" />
+
+            <TextView
+                android:id="@+id/bank_details_title"
+                style="@style/h2_primary_dark"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="16dp"
+                android:text="Реквизиты сторон"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/order_status" />
+
+            <TextView
+                android:id="@+id/customer_title"
+                style="@style/h7_grey"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="16dp"
+                android:paddingTop="4dp"
+                android:text="Экспедитор"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/bank_details_title" />
+
+            <TextView
+                android:id="@+id/customer_name"
+                style="@style/h4_primary_dark"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/customer_title"
+                tools:text="ООО &quot;МОНОПОЛИЯ.ОНЛАЙН&quot;" />
+
+            <TextView
+                android:id="@+id/customer_tin"
+                style="@style/h4_primary_dark"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/customer_name"
+                tools:text="ИНН 7810384750" />
+
+            <TextView
+                android:id="@+id/customer_trrc"
+                style="@style/h4_primary_dark"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/customer_tin"
+                tools:text="КПП 781001001" />
+
+            <TextView
+                android:id="@+id/carrier_title"
+                style="@style/h7_grey"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/colorLightGrey"
+                android:paddingHorizontal="16dp"
+                android:paddingTop="4dp"
+                android:text="Перевозчик"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/customer_trrc" />
+
+            <TextView
+                android:id="@+id/carrier_name"
+                style="@style/h4_primary_dark"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/colorLightGrey"
+                android:paddingHorizontal="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/carrier_title"
+                tools:text="ООО &quot;ТРАНСРЕАЛГАЗ&quot;" />
+
+            <TextView
+                android:id="@+id/carrier_tin"
+                style="@style/h4_primary_dark"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/colorLightGrey"
+                android:paddingHorizontal="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/carrier_name"
+                tools:text="ИНН 1650131370" />
+
+            <TextView
+                android:id="@+id/carrier_trrc"
+                style="@style/h4_primary_dark"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/colorLightGrey"
+                android:paddingHorizontal="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/carrier_tin"
+                tools:text="КПП 772701001" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

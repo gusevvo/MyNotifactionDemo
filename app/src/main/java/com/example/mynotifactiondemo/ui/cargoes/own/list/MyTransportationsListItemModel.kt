@@ -1,6 +1,6 @@
-package com.example.mynotifactiondemo.ui.cargoes.own
+package com.example.mynotifactiondemo.ui.cargoes.own.list
 
-data class MyTransportationListItemModel(
+data class MyTransportationsListItemModel(
     val id: String,
     val numberAndStatusChangeDate: String,
     val statusText: String,
