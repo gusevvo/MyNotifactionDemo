@@ -8,7 +8,7 @@
 
     <Button
         android:id="@+id/fragment_launch_button_next"
-        style="@style/button"
+        style="@style/positive_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Далее"

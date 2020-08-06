@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
@@ -46,6 +47,19 @@ class MyTransportationDetailsFragment : Fragment() {
             }
         })
 
+        myTransportationViewModel.rejected.observe(viewLifecycleOwner, Observer { result ->
+            when (result.status) {
+                ViewModelResult.Status.SUCCESS -> {
+                    hideProgressBar()
+                    Toast.makeText(context, "Заявка отклонена", Toast.LENGTH_LONG).show()
+                }
+                ViewModelResult.Status.FAILURE -> handleFailure(result.getFailureOrNull()!!)
+                ViewModelResult.Status.LOADING -> handleLoading()
+            }
+        })
+
+        reject.setOnClickListener { myTransportationViewModel.rejectMyTransportation(args.id) }
+        accept.setOnClickListener { myTransportationViewModel.acceptMyTransportation(args.id, "123456") }
     }
 
     private fun handleSuccess(myTransportation: MyTransportationResponseDto) {
@@ -72,7 +86,8 @@ class MyTransportationDetailsFragment : Fragment() {
 
     private fun handleFailure(failure: ViewModelResult.Failure) {
         hideProgressBar()
-        Log.e("login", "Ошибка аутентификации", failure.throwable)
+        Toast.makeText(context, failure.throwable.message, Toast.LENGTH_LONG).show()
+        Log.e("TransportationDetails", "Ошибка", failure.throwable)
     }
 
     private fun handleLoading() {
