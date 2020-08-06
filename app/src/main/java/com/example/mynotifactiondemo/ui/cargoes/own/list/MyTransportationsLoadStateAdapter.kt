@@ -1,4 +1,4 @@
-package com.example.mynotifactiondemo.ui.cargoes.own
+package com.example.mynotifactiondemo.ui.cargoes.own.list
 
 import android.view.LayoutInflater
 import android.view.View
@@ -41,6 +41,9 @@ class MyTransportationsLoadStateAdapter(private val retry: () -> Unit) :
     override fun onCreateViewHolder(parent: ViewGroup, loadState: LoadState): LoadStateViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.fragment_my_transportations_load_state_footer, parent, false)
-        return LoadStateViewHolder(view, retry)
+        return LoadStateViewHolder(
+            view,
+            retry
+        )
     }
 }

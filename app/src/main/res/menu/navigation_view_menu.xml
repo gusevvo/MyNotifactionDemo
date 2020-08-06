@@ -2,11 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_cargoes"
+            android:id="@+id/cargoesFragment"
             android:icon="@drawable/ic_cargo"
             android:title="Грузы" />
         <item
-            android:id="@+id/nav_my_transportations"
+            android:id="@+id/myTransportationsFragment"
             android:icon="@drawable/ic_own_cargoes"
             android:title="Мои перевозки" />
         <item

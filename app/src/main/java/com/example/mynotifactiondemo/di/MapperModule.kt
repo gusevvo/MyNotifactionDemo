@@ -1,6 +1,7 @@
 package com.example.mynotifactiondemo.di
 
 import com.example.mynotifactiondemo.common.Mapper
+import com.example.mynotifactiondemo.common.mappingprofiles.MyTransportationResponseDtoToMyTransportationDetailsModelMappingProfile
 import com.example.mynotifactiondemo.common.mappingprofiles.MyTransportationsResponseItemDtoToMyTransportationListItemModelMappingProfile
 import dagger.Module
 import dagger.Provides
@@ -17,6 +18,7 @@ class MapperModule {
     fun provideMapper(): Mapper {
         return Mapper().apply {
             addMapping(MyTransportationsResponseItemDtoToMyTransportationListItemModelMappingProfile())
+            addMapping(MyTransportationResponseDtoToMyTransportationDetailsModelMappingProfile())
         }
     }
 }

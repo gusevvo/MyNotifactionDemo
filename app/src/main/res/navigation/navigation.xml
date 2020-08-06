@@ -13,8 +13,8 @@
     <fragment
         android:id="@+id/launchFragment"
         android:name="com.example.mynotifactiondemo.ui.LaunchFragment"
-        android:label="fragment_launch"
-        tools:layout="@layout/fragment_launch" >
+        android:label="Веселый франшизник"
+        tools:layout="@layout/fragment_launch">
         <action
             android:id="@+id/action_launchFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
@@ -22,8 +22,8 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.mynotifactiondemo.ui.LoginFragment"
-        android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
+        android:label="Вход в систему"
+        tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_myTransportationsFragment"
             app:destination="@id/myTransportationsFragment" />
@@ -31,11 +31,24 @@
     <fragment
         android:id="@+id/cargoesFragment"
         android:name="com.example.mynotifactiondemo.ui.cargoes.CargoesFragment"
-        android:label="fragment_cargoes"
+        android:label="Грузы"
         tools:layout="@layout/fragment_cargoes" />
     <fragment
         android:id="@+id/myTransportationsFragment"
-        android:name="com.example.mynotifactiondemo.ui.cargoes.own.MyTransportationsFragment"
-        android:label="fragment_my_transportations"
-        tools:layout="@layout/fragment_my_transportations" />
+        android:name="com.example.mynotifactiondemo.ui.cargoes.own.list.MyTransportationsFragment"
+        android:label="Мои перевозки"
+        tools:layout="@layout/fragment_my_transportations">
+        <action
+            android:id="@+id/action_myTransportationsFragment_to_myTransportationDetailsFragment"
+            app:destination="@id/myTransportationDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/myTransportationDetailsFragment"
+        android:name="com.example.mynotifactiondemo.ui.cargoes.own.details.MyTransportationDetailsFragment"
+        android:label="Перевозка"
+        tools:layout="@layout/fragment_my_transportation_details">
+        <argument
+            android:name="id"
+            app:argType="string" />
+    </fragment>
 </navigation>

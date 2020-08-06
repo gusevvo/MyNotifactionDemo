@@ -3,6 +3,8 @@ package com.example.mynotifactiondemo.di
 import android.webkit.CookieManager
 import com.example.mynotifactiondemo.BuildConfig
 import com.example.mynotifactiondemo.data.api.ApiClientInterface
+import com.example.mynotifactiondemo.data.api.DateJsonAdapter
+import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -70,9 +72,13 @@ class ApiModule {
     @Provides
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient, BASE_URL: String): Retrofit {
+        val moshi = Moshi.Builder()
+            .add(DateJsonAdapter())
+            .build()
+
         return Retrofit.Builder()
             .addConverterFactory(ScalarsConverterFactory.create())
-            .addConverterFactory(MoshiConverterFactory.create())
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
             .baseUrl(BASE_URL)
             .client(okHttpClient)
             .build()

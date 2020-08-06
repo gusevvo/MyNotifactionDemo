@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_cargoes_own_transportations_details"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.cargoes.own.details.MyTransportationDetailsFragment">
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+            <TextView
+                android:id="@+id/order_number"
+                style="@style/transportation_details_order_number"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Заявка №ЗП-67498" />
+
+            <TextView
+                android:id="@+id/order_date"
+                style="@style/transportation_details_order_data"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/order_number"
+                tools:text="от 24.05.2020 22:00" />
+
+            <TextView
+                android:id="@+id/contract_number_and_date"
+                style="@style/transportation_details_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/order_date"
+                tools:text="к договору №815-2017-ОЛ/МО-П от 16.08.2017" />
+
+            <TextView
+                android:id="@+id/order_status"
+                style="@style/transportation_details_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/contract_number_and_date"
+                tools:text="Требуется переподписание" />
+
+            <TextView
+                android:id="@+id/bank_details_title"
+                style="@style/section_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Реквизиты сторон"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/order_status" />
+
+            <com.example.mynotifactiondemo.ui.components.LabelValuePair
+                android:id="@+id/customer_bank_details"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/bank_details_title"
+                app:labelText="Экспедитор"
+                tools:valueText="ООО &quot;МОНОПОЛИЯ.ОНЛАЙН&quot; ИНН 7810384750\nКПП 781001001" />
+
+            <com.example.mynotifactiondemo.ui.components.LabelValuePair
+                android:id="@+id/carrier_bank_details"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/colorLightGrey"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/customer_bank_details"
+                app:labelText="Перевозчик"
+                tools:valueText="ООО &quot;ТРАНСРЕАЛГАЗ&quot; ИНН 1650131370\nКПП 772701001" />
+
+            <TextView
+                android:id="@+id/order_info_title"
+                style="@style/section_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Информация о заявке"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/carrier_bank_details" />
+
+            <com.example.mynotifactiondemo.ui.components.LabelValuePair
+                android:id="@+id/cargo_type"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/order_info_title"
+                app:labelText="Тип груза"
+                tools:valueText="Чипсы" />
+
+            <com.example.mynotifactiondemo.ui.components.LabelValuePair
+                android:id="@+id/loading_type"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/colorLightGrey"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cargo_type"
+                app:labelText="Тип погрузки"
+                tools:valueText="Задняя" />
+
+            <com.example.mynotifactiondemo.ui.components.LabelValuePair
+                android:id="@+id/trailer_volume"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/loading_type"
+                app:labelText="Объем прицепа"
+                tools:valueText="82 м³" />
+
+            <com.example.mynotifactiondemo.ui.components.LabelValuePair
+                android:id="@+id/trailer_type"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/colorLightGrey"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/trailer_volume"
+                app:labelText="Тип прицепа"
+                tools:valueText="Тент" />
+
+            <com.example.mynotifactiondemo.ui.components.LabelValuePair
+                android:id="@+id/carrying_capacity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/trailer_type"
+                app:labelText="Грузоподъемность"
+                tools:valueText="5 тонн" />
+
+            <com.example.mynotifactiondemo.ui.components.LabelValuePair
+                android:id="@+id/cost_without_vat"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/colorLightGrey"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/carrying_capacity"
+                app:labelText="Стоимость услуги без учета НДС"
+                tools:valueText="36 250,00 ₽" />
+
+            <com.example.mynotifactiondemo.ui.components.LabelValuePair
+                android:id="@+id/payment_due_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cost_without_vat"
+                app:labelText="Срок оплаты"
+                tools:valueText="Оплата не позднее 35 рабочих дней с даты получения документов, подтверждающих перевозку" />
+
+            <com.example.mynotifactiondemo.ui.components.LabelValuePair
+                android:id="@+id/additional_requirements"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/colorLightGrey"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/payment_due_date"
+                app:labelText="Дополнительные требоавния"
+                tools:valueText="Водитель должен знать на погрузке номер заказа! Номер заказа 6316487. Водителю обязательно при себе иметь светоотражающий жилет. Проверка опаллечивания паллет(4 слоя) Отметки о времени  прибытия/убытия на загрузке/выгрузке -ПРОСТАВЛЯТЬ ОБЯЗАТЕЛЕНО! ТС без крюков!  маска медицинская , перчатки, сиз" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
