@@ -64,7 +64,7 @@
 
     <Button
         android:id="@+id/fragment_login_button_login"
-        style="@style/button"
+        style="@style/positive_button"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
