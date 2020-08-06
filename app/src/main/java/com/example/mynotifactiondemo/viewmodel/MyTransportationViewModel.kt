@@ -18,6 +18,11 @@ class MyTransportationViewModel @ViewModelInject constructor(
     val myTransportation: LiveData<ViewModelResult<MyTransportationResponseDto>>
         get() = _myTransportation
 
+    private val _rejected = MutableLiveData<ViewModelResult<Boolean>>()
+    val rejected: LiveData<ViewModelResult<Boolean>>
+        get() = _rejected
+
+
     init {
         _myTransportation.value = ViewModelResult.loading()
     }
@@ -27,6 +32,30 @@ class MyTransportationViewModel @ViewModelInject constructor(
             _myTransportation.postValue(ViewModelResult.loading())
             try {
                 val dto = myTransportationsRepository.getMyTransportation(id)
+                _myTransportation.postValue(ViewModelResult.success(dto))
+            } catch (throwable: Throwable) {
+                _myTransportation.postValue(ViewModelResult.failure(throwable))
+            }
+        }
+    }
+
+    fun rejectMyTransportation(id: String) {
+        viewModelScope.launch {
+            _rejected.postValue(ViewModelResult.loading())
+            try {
+                myTransportationsRepository.rejectMyTransportation(id)
+                _rejected.postValue(ViewModelResult.success(true))
+            } catch (throwable: Throwable) {
+                _rejected.postValue(ViewModelResult.failure(throwable))
+            }
+        }
+    }
+
+    fun acceptMyTransportation(id: String, code: String) {
+        viewModelScope.launch {
+            _myTransportation.postValue(ViewModelResult.loading())
+            try {
+                val dto = myTransportationsRepository.acceptMyTransportation(id, code)
                 _myTransportation.postValue(ViewModelResult.success(dto))
             } catch (throwable: Throwable) {
                 _myTransportation.postValue(ViewModelResult.failure(throwable))
