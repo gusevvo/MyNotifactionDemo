@@ -1,4 +1,4 @@
-package com.example.mynotifactiondemo.common
+package com.example.mynotifactiondemo.common.mapping
 
 import java.lang.IllegalArgumentException
 import kotlin.reflect.KClass

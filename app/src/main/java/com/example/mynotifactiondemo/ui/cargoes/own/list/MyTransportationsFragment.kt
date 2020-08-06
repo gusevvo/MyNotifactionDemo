@@ -14,7 +14,7 @@ import androidx.paging.LoadState
 import androidx.paging.map
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mynotifactiondemo.R
-import com.example.mynotifactiondemo.common.Mapper
+import com.example.mynotifactiondemo.common.mapping.Mapper
 import com.example.mynotifactiondemo.viewmodel.MyTransportationsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_my_transportations.*

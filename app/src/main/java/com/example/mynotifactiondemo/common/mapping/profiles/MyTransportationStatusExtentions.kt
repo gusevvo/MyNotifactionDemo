@@ -1,4 +1,4 @@
-package com.example.mynotifactiondemo.common.mappingprofiles
+package com.example.mynotifactiondemo.common.mapping.profiles
 
 import java.lang.IllegalArgumentException
 
