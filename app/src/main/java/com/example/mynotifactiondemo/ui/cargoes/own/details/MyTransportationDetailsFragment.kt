@@ -10,17 +10,19 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.example.mynotifactiondemo.R
-import com.example.mynotifactiondemo.common.mappingprofiles.toStatusColor
-import com.example.mynotifactiondemo.common.mappingprofiles.toStatusText
+import com.example.mynotifactiondemo.common.Mapper
 import com.example.mynotifactiondemo.data.api.dto.MyTransportationResponseDto
 import com.example.mynotifactiondemo.viewmodel.MyTransportationViewModel
 import com.example.mynotifactiondemo.viewmodel.model.ViewModelResult
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.component_label_value_pair.view.*
 import kotlinx.android.synthetic.main.fragment_my_transportation_details.*
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MyTransportationDetailsFragment : Fragment() {
-
+    @Inject
+    lateinit var mapper: Mapper
     private val args: MyTransportationDetailsFragmentArgs by navArgs()
     private val myTransportationViewModel: MyTransportationViewModel by viewModels()
 
@@ -48,17 +50,24 @@ class MyTransportationDetailsFragment : Fragment() {
 
     private fun handleSuccess(myTransportation: MyTransportationResponseDto) {
         hideProgressBar()
-        order_number.text = "Заявка №${myTransportation.number}"
-        order_date.text = "от ${myTransportation.forceDate}"
-        contract_number_and_date.text = "к договору №${myTransportation.contract.number} от ${myTransportation.contract.number}"
-        order_status.text = myTransportation.status.toStatusText()
-        order_status.setTextColor(myTransportation.status.toStatusColor())
-        customer_name.text = myTransportation.customer.name
-        customer_tin.text = "ИНН ${myTransportation.customer.tin}"
-        customer_trrc.text = "КПП ${myTransportation.customer.trrc}"
-        carrier_name.text = myTransportation.carrier.name
-        carrier_tin.text = "ИНН ${myTransportation.carrier.tin}"
-        carrier_trrc.text = "КПП ${myTransportation.carrier.trrc}"
+
+        val model = mapper.map<MyTransportationDetailsModel>(myTransportation)
+
+        order_number.text = model.orderNumber
+        order_date.text = model.orderDate
+        contract_number_and_date.text = model.contractNumberAndDate
+        order_status.text = model.orderStatusText
+        order_status.setTextColor(model.orderStatusTextColor)
+        customer_bank_details.valueText.text = model.customerBankDetails
+        carrier_bank_details.valueText.text = model.carrierBankDetails
+        cargo_type.valueText.text = model.carrierBankDetails
+        loading_type.valueText.text = model.carrierBankDetails
+        trailer_volume.valueText.text = model.trailerVolume
+        trailer_type.valueText.text = model.trailerType
+        carrying_capacity.valueText.text = model.carryingCapacity
+        cost_without_vat.valueText.text = model.costWithoutVat
+        payment_due_date.valueText.text = model.paymentDueDate
+        additional_requirements.valueText.text = model.additionalRequirements
     }
 
     private fun handleFailure(failure: ViewModelResult.Failure) {
