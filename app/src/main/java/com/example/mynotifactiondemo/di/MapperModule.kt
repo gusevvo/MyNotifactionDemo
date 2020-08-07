@@ -1,8 +1,8 @@
 package com.example.mynotifactiondemo.di
 
-import com.example.mynotifactiondemo.common.Mapper
-import com.example.mynotifactiondemo.common.mappingprofiles.MyTransportationResponseDtoToMyTransportationDetailsModelMappingProfile
-import com.example.mynotifactiondemo.common.mappingprofiles.MyTransportationsResponseItemDtoToMyTransportationListItemModelMappingProfile
+import com.example.mynotifactiondemo.common.mapping.Mapper
+import com.example.mynotifactiondemo.common.mapping.profiles.MyTransportationResponseDtoToMyTransportationDetailsModelMappingProfile
+import com.example.mynotifactiondemo.common.mapping.profiles.MyTransportationsResponseItemDtoToMyTransportationListItemModelMappingProfile
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -1,11 +1,12 @@
-package com.example.mynotifactiondemo.common.mappingprofiles
+package com.example.mynotifactiondemo.common.mapping.profiles
 
-import com.example.mynotifactiondemo.common.MappingProfileInterface
+import com.example.mynotifactiondemo.common.mapping.MappingProfileInterface
 import com.example.mynotifactiondemo.data.api.dto.MyTransportationsResponseItemDto
 import com.example.mynotifactiondemo.ui.cargoes.own.list.MyTransportationsListItemModel
 
 class MyTransportationsResponseItemDtoToMyTransportationListItemModelMappingProfile
-    : MappingProfileInterface<MyTransportationsResponseItemDto, MyTransportationsListItemModel> {
+    :
+    MappingProfileInterface<MyTransportationsResponseItemDto, MyTransportationsListItemModel> {
 
     override fun map(source: MyTransportationsResponseItemDto) =
         MyTransportationsListItemModel(

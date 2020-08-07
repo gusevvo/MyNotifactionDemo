@@ -11,7 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.example.mynotifactiondemo.R
-import com.example.mynotifactiondemo.common.Mapper
+import com.example.mynotifactiondemo.common.mapping.Mapper
 import com.example.mynotifactiondemo.data.api.dto.MyTransportationResponseDto
 import com.example.mynotifactiondemo.viewmodel.MyTransportationViewModel
 import com.example.mynotifactiondemo.viewmodel.model.ViewModelResult
