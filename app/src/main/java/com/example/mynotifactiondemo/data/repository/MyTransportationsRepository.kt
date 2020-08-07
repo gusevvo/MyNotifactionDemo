@@ -4,10 +4,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.example.mynotifactiondemo.data.api.ApiClientInterface
-import com.example.mynotifactiondemo.data.api.dto.MyTransportationAcceptRequestDto
-import com.example.mynotifactiondemo.data.api.dto.MyTransportationRejectRequestDto
-import com.example.mynotifactiondemo.data.api.dto.MyTransportationResponseDto
-import com.example.mynotifactiondemo.data.api.dto.MyTransportationsResponseItemDto
+import com.example.mynotifactiondemo.data.api.dto.*
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -32,6 +29,14 @@ class MyTransportationsRepository @Inject constructor(
 
     suspend fun getMyTransportation(id: String): MyTransportationResponseDto {
         return apiClient.getMyTransportation(id)
+    }
+
+    suspend fun requestVerificationCode(id: String, deviceToken: String) {
+        val requestDto = RequestVerificationCodeRequestDto(
+            documentId = id,
+            deviceToken = deviceToken
+        )
+        return apiClient.requestVerificationCode(requestDto)
     }
 
     suspend fun rejectMyTransportation(id: String) {
