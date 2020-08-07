@@ -1,15 +1,18 @@
 package com.example.mynotifactiondemo.ui
 
+import android.app.NotificationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.example.mynotifactiondemo.R
+import com.example.mynotifactiondemo.common.services.createChannel
 import com.example.mynotifactiondemo.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
@@ -27,6 +30,13 @@ class MainActivity : AppCompatActivity() {
         setupHamburgerMenuItem()
         setupActionBar()
         setupNavigationView()
+        createNotificationChanel()
+    }
+
+    private fun createNotificationChanel() {
+        val notificationManager = ContextCompat.getSystemService(applicationContext, NotificationManager::class.java) as NotificationManager
+
+        notificationManager.createChannel("my_chanel_id", "my_chanel")
     }
 
     private fun setupNavigationView() {
