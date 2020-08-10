@@ -38,11 +38,11 @@ class LoginFragment : Fragment() {
             }
         })
 
-        fragment_login_button_login.setOnClickListener { this.onLoginClick(it) }
+        loginButton.setOnClickListener { this.onLoginClick(it) }
     }
 
     private fun onLoginClick(view: View) {
-        loginViewModel.login(userEmail.text.toString(), userPassword.text.toString())
+        loginViewModel.login(userEmailInput.text.toString(), userPasswordInput.text.toString())
     }
 
     private fun handleSuccess(state: LoginViewModel.AuthenticationState) {
@@ -68,11 +68,11 @@ class LoginFragment : Fragment() {
 
     private fun showProgressBar() {
         loginGroup.visibility = View.GONE
-        progressBar.visibility = View.VISIBLE
+        loginProgressBar.visibility = View.VISIBLE
     }
 
     private fun hideProgressBar() {
         loginGroup.visibility = View.VISIBLE
-        progressBar.visibility = View.GONE
+        loginProgressBar.visibility = View.GONE
     }
 }

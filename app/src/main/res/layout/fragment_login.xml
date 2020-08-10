@@ -11,82 +11,72 @@
         android:id="@+id/loginGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="textView,userEmail,userPassword,fragment_login_button_login"/>
+        app:constraint_referenced_ids="userEmailInputLayout,userPasswordInputLayout,loginButton" />
 
-    <TextView
-        android:id="@+id/textView"
-        style="@style/title"
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/userEmailInputLayout"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp"
-        android:text="Войти в систему"
-        app:layout_constraintBottom_toTopOf="@+id/userEmail"
+        app:layout_constraintBottom_toTopOf="@+id/userPasswordInputLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.25"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintVertical_chainStyle="packed">
 
-    <EditText
-        android:id="@+id/userEmail"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/userEmailInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Введите телефон или почту"
+            android:inputType="textEmailAddress"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/userPasswordInputLayout"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:ems="10"
-        android:hint="Введите телефон или почту"
-        android:importantForAutofill="no"
-        android:inputType="textEmailAddress"
-        app:layout_constraintBottom_toTopOf="@+id/userPassword"
+        app:layout_constraintBottom_toTopOf="@+id/loginButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/userEmailInputLayout">
 
-    <EditText
-        android:id="@+id/userPassword"
-        style="@style/input"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:ems="10"
-        android:hint="Введите пароль"
-        android:importantForAutofill="no"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/fragment_login_button_login"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userEmail" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/userPasswordInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Введите пароль"
+            android:inputType="textPassword"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/fragment_login_button_login"
+        android:id="@+id/loginButton"
         style="@style/positive_button"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp"
         android:text="Войти"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/userPasswordInputLayout" />
 
     <ProgressBar
-        android:id="@+id/progressBar"
+        android:id="@+id/loginProgressBar"
         style="?android:attr/progressBarStyle"
-        android:layout_width="300dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:indeterminate="true"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

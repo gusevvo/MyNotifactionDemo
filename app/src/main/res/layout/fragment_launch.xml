@@ -6,21 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".ui.LaunchFragment">
 
-    <Button
-        android:id="@+id/fragment_launch_button_next"
-        style="@style/positive_button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Далее"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="300dp"
-        android:layout_height="170dp"
+        android:layout_height="150dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
@@ -35,5 +24,16 @@
         app:layout_constraintVertical_bias="0.25"
         app:layout_constraintVertical_chainStyle="packed"
         app:srcCompat="@drawable/ic_launch_screen" />
+
+    <Button
+        android:id="@+id/fragment_launch_button_next"
+        style="@style/positive_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Далее"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
