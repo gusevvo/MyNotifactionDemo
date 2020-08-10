@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -49,13 +50,18 @@ class LoginFragment : Fragment() {
         hideProgressBar()
         when (state) {
             LoginViewModel.AuthenticationState.AUTHENTICATED -> navigateToMyTransportations()
-            LoginViewModel.AuthenticationState.UNAUTHENTICATED -> Log.w("login", "Пользователь не аутентифицирован")
+            LoginViewModel.AuthenticationState.UNAUTHENTICATED -> {
+                Log.w("login", "Пользователь не аутентифицирован")
+                Toast.makeText(context, "Пользователь не аутентифицирован", Toast.LENGTH_LONG).show()
+            }
+
         }
     }
 
     private fun handleFailure(failure: ViewModelResult.Failure) {
         hideProgressBar()
         Log.e("login", "Ошибка аутентификации", failure.throwable)
+        Toast.makeText(context, failure.throwable.message, Toast.LENGTH_LONG).show()
     }
 
     private fun handleLoading() {
