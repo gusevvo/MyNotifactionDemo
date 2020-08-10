@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -38,24 +39,29 @@ class LoginFragment : Fragment() {
             }
         })
 
-        fragment_login_button_login.setOnClickListener { this.onLoginClick(it) }
+        loginButton.setOnClickListener { this.onLoginClick(it) }
     }
 
     private fun onLoginClick(view: View) {
-        loginViewModel.login(userEmail.text.toString(), userPassword.text.toString())
+        loginViewModel.login(userEmailInput.text.toString(), userPasswordInput.text.toString())
     }
 
     private fun handleSuccess(state: LoginViewModel.AuthenticationState) {
         hideProgressBar()
         when (state) {
             LoginViewModel.AuthenticationState.AUTHENTICATED -> navigateToMyTransportations()
-            LoginViewModel.AuthenticationState.UNAUTHENTICATED -> Log.w("login", "Пользователь не аутентифицирован")
+            LoginViewModel.AuthenticationState.UNAUTHENTICATED -> {
+                Log.w("login", "Пользователь не аутентифицирован")
+                Toast.makeText(context, "Пользователь не аутентифицирован", Toast.LENGTH_LONG).show()
+            }
+
         }
     }
 
     private fun handleFailure(failure: ViewModelResult.Failure) {
         hideProgressBar()
         Log.e("login", "Ошибка аутентификации", failure.throwable)
+        Toast.makeText(context, failure.throwable.message, Toast.LENGTH_LONG).show()
     }
 
     private fun handleLoading() {
@@ -68,11 +74,11 @@ class LoginFragment : Fragment() {
 
     private fun showProgressBar() {
         loginGroup.visibility = View.GONE
-        progressBar.visibility = View.VISIBLE
+        loginProgressBar.visibility = View.VISIBLE
     }
 
     private fun hideProgressBar() {
         loginGroup.visibility = View.VISIBLE
-        progressBar.visibility = View.GONE
+        loginProgressBar.visibility = View.GONE
     }
 }
