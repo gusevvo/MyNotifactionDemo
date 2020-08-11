@@ -1,4 +1,4 @@
-package com.example.mynotifactiondemo.ui.cargoes
+package com.example.mynotifactiondemo.ui.main.cargoes
 
 import android.annotation.SuppressLint
 import android.graphics.Bitmap
@@ -45,7 +45,7 @@ class CargoesFragment : Fragment() {
 
                 val isLoginPage = url?.toHttpUrlOrNull()?.pathSegments?.contains("login")
                 if (isLoginPage == true) {
-                    findNavController().navigate(R.id.loginFragment)
+//                    findNavController().navigate(R.id.loginFragment)
                 }
             }
 

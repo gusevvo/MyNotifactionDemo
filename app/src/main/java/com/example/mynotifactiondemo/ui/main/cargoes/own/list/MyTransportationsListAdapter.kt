@@ -1,4 +1,4 @@
-package com.example.mynotifactiondemo.ui.cargoes.own.list
+package com.example.mynotifactiondemo.ui.main.cargoes.own.list
 
 import android.view.LayoutInflater
 import android.view.View

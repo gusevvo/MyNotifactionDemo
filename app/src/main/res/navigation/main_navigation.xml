@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/cargoesFragment"
+        android:name="com.example.mynotifactiondemo.ui.main.cargoes.CargoesFragment"
+        android:label="Грузы"
+        tools:layout="@layout/fragment_cargoes" />
+    <fragment
+        android:id="@+id/myTransportationsFragment"
+        android:name="com.example.mynotifactiondemo.ui.main.cargoes.own.list.MyTransportationsFragment"
+        android:label="Мои перевозки"
+        tools:layout="@layout/fragment_my_transportations">
+        <action
+            android:id="@+id/action_myTransportationsFragment_to_myTransportationDetailsFragment"
+            app:destination="@id/myTransportationDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/myTransportationDetailsFragment"
+        android:name="com.example.mynotifactiondemo.ui.main.cargoes.own.details.MyTransportationDetailsFragment"
+        android:label="Перевозка"
+        tools:layout="@layout/fragment_my_transportation_details">
+        <argument
+            android:name="id"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.example.mynotifactiondemo.ui.splash.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash" >
+        <action
+            android:id="@+id/action_splashFragment_to_myTransportationsFragment"
+            app:destination="@id/myTransportationsFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_splashFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.mynotifactiondemo.ui.login.LoginFragment"
+        android:label="Войти в систему"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_myTransportationsFragment"
+            app:destination="@id/myTransportationsFragment" />
+    </fragment>
+</navigation>

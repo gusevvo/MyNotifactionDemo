@@ -1,4 +1,4 @@
-package com.example.mynotifactiondemo.ui.cargoes.own.details
+package com.example.mynotifactiondemo.ui.main.cargoes.own.details
 
 import android.os.Bundle
 import android.util.Log

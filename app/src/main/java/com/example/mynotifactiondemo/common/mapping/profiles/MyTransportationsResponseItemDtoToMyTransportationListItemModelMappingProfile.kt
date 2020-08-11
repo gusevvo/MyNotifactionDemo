@@ -2,7 +2,7 @@ package com.example.mynotifactiondemo.common.mapping.profiles
 
 import com.example.mynotifactiondemo.common.mapping.MappingProfileInterface
 import com.example.mynotifactiondemo.data.api.dto.MyTransportationsResponseItemDto
-import com.example.mynotifactiondemo.ui.cargoes.own.list.MyTransportationsListItemModel
+import com.example.mynotifactiondemo.ui.main.cargoes.own.list.MyTransportationsListItemModel
 
 class MyTransportationsResponseItemDtoToMyTransportationListItemModelMappingProfile
     :

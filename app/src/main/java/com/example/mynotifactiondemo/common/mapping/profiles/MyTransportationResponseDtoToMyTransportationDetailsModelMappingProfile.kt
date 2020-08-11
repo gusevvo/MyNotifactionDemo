@@ -2,7 +2,7 @@ package com.example.mynotifactiondemo.common.mapping.profiles
 
 import com.example.mynotifactiondemo.common.mapping.MappingProfileInterface
 import com.example.mynotifactiondemo.data.api.dto.MyTransportationResponseDto
-import com.example.mynotifactiondemo.ui.cargoes.own.details.MyTransportationDetailsModel
+import com.example.mynotifactiondemo.ui.main.cargoes.own.details.MyTransportationDetailsModel
 import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.text.SimpleDateFormat

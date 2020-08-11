@@ -1,4 +1,4 @@
-package com.example.mynotifactiondemo.ui.cargoes.own.list
+package com.example.mynotifactiondemo.ui.main.cargoes.own.list
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

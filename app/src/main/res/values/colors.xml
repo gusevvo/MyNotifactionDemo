@@ -11,4 +11,6 @@
     <color name="colorButtonStatePressed">#ff9922</color>
     <color name="colorButtonStateDisabled">#b2a770</color>
     <color name="colorButtonDefault">#ffd922</color>
+    <color name="wheelColor">#708096</color>
+    <color name="roadColor">#708096</color>
 </resources>

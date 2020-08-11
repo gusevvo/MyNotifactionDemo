@@ -1,4 +1,4 @@
-package com.example.mynotifactiondemo.ui.components
+package com.example.mynotifactiondemo.ui.main.components
 
 import android.content.Context
 import android.util.AttributeSet
