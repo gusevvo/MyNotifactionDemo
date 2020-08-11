@@ -8,13 +8,13 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="300dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_width="340dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:contentDescription="Управление FTL-грузами, бескарточный топливный процессинг"
         app:layout_constraintBottom_toTopOf="@+id/fragment_launch_button_next"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,7 +23,9 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.25"
         app:layout_constraintVertical_chainStyle="packed"
-        app:srcCompat="@drawable/ic_launch_screen" />
+        app:srcCompat="@drawable/ic_long_road_animation"
+         />
+<!--    app:srcCompat="@drawable/truck_wheel_animator"-->
 
     <Button
         android:id="@+id/fragment_launch_button_next"

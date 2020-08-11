@@ -23,6 +23,7 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         buildConfigField 'String', 'BASE_URL', '"https://develop12.monopoly.su/"'
+
     }
 
     buildTypes {
