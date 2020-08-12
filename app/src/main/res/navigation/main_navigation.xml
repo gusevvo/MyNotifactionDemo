@@ -40,17 +40,23 @@
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_splashFragment_to_loginFragment"
-            app:destination="@id/loginFragment"
+            app:destination="@id/navigation"
             app:popUpTo="@id/splashFragment"
             app:popUpToInclusive="true" />
     </fragment>
-    <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.example.mynotifactiondemo.ui.login.LoginFragment"
-        android:label="Войти в систему"
-        tools:layout="@layout/fragment_login" >
-        <action
-            android:id="@+id/action_loginFragment_to_myTransportationsFragment"
-            app:destination="@id/myTransportationsFragment" />
-    </fragment>
+    <navigation android:id="@+id/navigation"
+        app:startDestination="@id/loginFragment">
+        <fragment
+            android:id="@+id/loginFragment"
+            android:name="com.example.mynotifactiondemo.ui.login.LoginFragment"
+            android:label="Войти в систему"
+            tools:layout="@layout/fragment_login">
+            <action
+                android:id="@+id/action_loginFragment_to_myTransportationsFragment"
+                app:destination="@id/myTransportationsFragment"
+                app:launchSingleTop="false"
+                app:popUpTo="@id/loginFragment"
+                app:popUpToInclusive="true" />
+        </fragment>
+    </navigation>
 </navigation>
