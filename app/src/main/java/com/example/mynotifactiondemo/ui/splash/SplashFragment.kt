@@ -32,7 +32,7 @@ class SplashFragment : Fragment() {
     }
 
     private fun navigateToLoginFragment() {
-        val toLoginFlow = SplashFragmentDirections.actionSplashFragmentToLoginFragment()
+        val toLoginFlow = SplashFragmentDirections.actionSplashFragmentToLoginActivity()
         findNavController().navigate(toLoginFlow)
     }
 }

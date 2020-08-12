@@ -50,7 +50,7 @@ class LoginFragment : Fragment() {
         hideProgressBar()
         when (state) {
             LoginViewModel.AuthenticationState.AUTHENTICATED -> {
-                val toMainFlow = LoginFragmentDirections.actionLoginFragmentToMyTransportationsFragment()
+                val toMainFlow = LoginFragmentDirections.actionLoginFragmentToMainActivity()
                 findNavController().navigate(toMainFlow)
             }
             LoginViewModel.AuthenticationState.UNAUTHENTICATED -> {

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation"
-    app:startDestination="@id/splashFragment">
+    app:startDestination="@id/myTransportationsFragment">
 
     <fragment
         android:id="@+id/cargoesFragment"
@@ -18,6 +18,9 @@
         <action
             android:id="@+id/action_myTransportationsFragment_to_myTransportationDetailsFragment"
             app:destination="@id/myTransportationDetailsFragment" />
+        <action
+            android:id="@+id/action_myTransportationsFragment_to_cargoesFragment"
+            app:destination="@id/cargoesFragment" />
     </fragment>
     <fragment
         android:id="@+id/myTransportationDetailsFragment"
@@ -28,35 +31,4 @@
             android:name="id"
             app:argType="string" />
     </fragment>
-    <fragment
-        android:id="@+id/splashFragment"
-        android:name="com.example.mynotifactiondemo.ui.splash.SplashFragment"
-        android:label="fragment_splash"
-        tools:layout="@layout/fragment_splash" >
-        <action
-            android:id="@+id/action_splashFragment_to_myTransportationsFragment"
-            app:destination="@id/myTransportationsFragment"
-            app:popUpTo="@id/splashFragment"
-            app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_splashFragment_to_loginFragment"
-            app:destination="@id/navigation"
-            app:popUpTo="@id/splashFragment"
-            app:popUpToInclusive="true" />
-    </fragment>
-    <navigation android:id="@+id/navigation"
-        app:startDestination="@id/loginFragment">
-        <fragment
-            android:id="@+id/loginFragment"
-            android:name="com.example.mynotifactiondemo.ui.login.LoginFragment"
-            android:label="Войти в систему"
-            tools:layout="@layout/fragment_login">
-            <action
-                android:id="@+id/action_loginFragment_to_myTransportationsFragment"
-                app:destination="@id/myTransportationsFragment"
-                app:launchSingleTop="false"
-                app:popUpTo="@id/loginFragment"
-                app:popUpToInclusive="true" />
-        </fragment>
-    </navigation>
 </navigation>
