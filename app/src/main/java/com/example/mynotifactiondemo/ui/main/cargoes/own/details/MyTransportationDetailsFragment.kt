@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.os.trace
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
@@ -66,13 +65,13 @@ class MyTransportationDetailsFragment : Fragment() {
                 ViewModelResult.Status.SUCCESS -> {
                     accept.isClickable = true
                     accept_progress_bar.visibility = View.GONE
-                    verification_code.visibility = View.VISIBLE
+                    verification_code_layout.visibility = View.VISIBLE
                     accept.text = "Подписать заявку"
                 }
                 ViewModelResult.Status.FAILURE ->{
                     accept.isClickable = true
                     accept_progress_bar.visibility = View.GONE
-                    verification_code.visibility = View.GONE
+                    verification_code_layout.visibility = View.GONE
                     accept.text = "Принять условия"
 
                     val throwable = result.getFailureOrNull()!!.throwable
@@ -92,6 +91,13 @@ class MyTransportationDetailsFragment : Fragment() {
     }
 
     private fun onAcceptButtonClick() {
+//        val verificationCode = verification_code_input.text.toString()
+//        val isAcceptFlow =  !verificationCode.isNullOrBlank()
+//
+//        if (isAcceptFlow) {
+//            myTransportationViewModel.acceptMyTransportation(args.id, verificationCode)
+//            return
+//        }
 
         FirebaseInstanceId.getInstance().instanceId
             .addOnCompleteListener(OnCompleteListener { task ->
@@ -136,7 +142,7 @@ class MyTransportationDetailsFragment : Fragment() {
         payment_due_date.valueText.text = model.paymentDueDate
         additional_requirements.valueText.text = model.additionalRequirements
 
-        verification_code.visibility = View.GONE
+        verification_code_layout.visibility = View.GONE
     }
 
     private fun handleFailure(failure: ViewModelResult.Failure) {

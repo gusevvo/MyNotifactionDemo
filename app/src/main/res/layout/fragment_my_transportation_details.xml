@@ -187,7 +187,8 @@
                 tools:valueText="Водитель должен знать на погрузке номер заказа! Номер заказа 6316487. Водителю обязательно при себе иметь светоотражающий жилет. Проверка опаллечивания паллет(4 слоя) Отметки о времени  прибытия/убытия на загрузке/выгрузке -ПРОСТАВЛЯТЬ ОБЯЗАТЕЛЕНО! ТС без крюков!  маска медицинская , перчатки, сиз" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/verification_code"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:id="@+id/verification_code_layout"
                 android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -198,6 +199,7 @@
                 tools:visibility="visible">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/verification_code_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
@@ -222,7 +224,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/accept"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/verification_code" />
+                app:layout_constraintTop_toBottomOf="@id/verification_code_layout" />
 
             <Button
                 android:id="@+id/accept"

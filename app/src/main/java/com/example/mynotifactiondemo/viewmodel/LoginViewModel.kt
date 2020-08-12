@@ -1,10 +1,8 @@
 package com.example.mynotifactiondemo.viewmodel
 
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import com.example.mynotifactiondemo.data.api.dto.UserResponseDto
 import com.example.mynotifactiondemo.data.repository.UsersRepository
 import com.example.mynotifactiondemo.viewmodel.model.ViewModelResult
 import kotlinx.coroutines.launch
@@ -21,6 +19,15 @@ class LoginViewModel @ViewModelInject constructor(
     private val _authenticationState = MutableLiveData<ViewModelResult<AuthenticationState>>()
     val authenticationState: LiveData<ViewModelResult<AuthenticationState>>
         get() = _authenticationState
+
+    val user: LiveData<ViewModelResult<UserResponseDto>> = liveData {
+        emit(ViewModelResult.loading())
+        try {
+            emit(ViewModelResult.success(usersRepository.getUser()))
+        } catch(throwable: Throwable) {
+            emit(ViewModelResult.failure(throwable))
+        }
+    }
 
     init {
         try {

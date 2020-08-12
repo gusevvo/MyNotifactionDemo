@@ -30,4 +30,6 @@ class UsersRepository @Inject constructor(
         apiClient.logout()
         userCredentialsPreferences.logout()
     }
+
+    suspend fun getUser() = apiClient.getUser()
 }
