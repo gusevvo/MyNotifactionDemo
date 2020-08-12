@@ -13,6 +13,8 @@ interface ApiClientInterface {
     @POST("UI_FortisCore/api/Registration/Logout")
     suspend fun logout(): String
 
+    @GET("UI_FortisCore/api/User/GetUserInfo")
+    suspend fun getUser(): UserResponseDto
 
     @POST("UI/Fortis/api/Cargoes/Own/Get")
     suspend fun getMyTransportations(@Body requestDto: MyTransportationsRequestDto): MyTransportationsResponseDto
