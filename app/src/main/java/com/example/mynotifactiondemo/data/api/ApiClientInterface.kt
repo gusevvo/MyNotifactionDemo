@@ -20,6 +20,9 @@ interface ApiClientInterface {
     @GET("UI/Fortis/api/Cargoes/Own/GetCargoVersion")
     suspend fun getMyTransportation(@Query("id") id: String): MyTransportationResponseDto
 
+    @POST("UI/Fortis/api/Cargoes/Own/SendCode")
+    suspend fun requestVerificationCode(@Body requestDto: RequestVerificationCodeRequestDto)
+
     @POST("UI/Fortis/api/Cargoes/Own/Reject")
     suspend fun rejectMyTransportation(@Body requestDto: MyTransportationRejectRequestDto)
 
