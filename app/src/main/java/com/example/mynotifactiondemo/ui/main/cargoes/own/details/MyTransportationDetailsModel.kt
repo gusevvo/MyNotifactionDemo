@@ -1,4 +1,4 @@
-package com.example.mynotifactiondemo.ui.cargoes.own.details
+package com.example.mynotifactiondemo.ui.main.cargoes.own.details
 
 data class MyTransportationDetailsModel(
     val orderNumber: String,

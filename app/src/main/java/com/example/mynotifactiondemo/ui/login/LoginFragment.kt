@@ -1,4 +1,4 @@
-package com.example.mynotifactiondemo.ui
+package com.example.mynotifactiondemo.ui.login
 
 import android.os.Bundle
 import android.util.Log
@@ -39,22 +39,23 @@ class LoginFragment : Fragment() {
             }
         })
 
-        loginButton.setOnClickListener { this.onLoginClick(it) }
+        loginButton.setOnClickListener { this.onLoginClick() }
     }
 
-    private fun onLoginClick(view: View) {
+    private fun onLoginClick() {
         loginViewModel.login(userEmailInput.text.toString(), userPasswordInput.text.toString())
     }
 
     private fun handleSuccess(state: LoginViewModel.AuthenticationState) {
         hideProgressBar()
         when (state) {
-            LoginViewModel.AuthenticationState.AUTHENTICATED -> navigateToMyTransportations()
+            LoginViewModel.AuthenticationState.AUTHENTICATED -> {
+                val toMainFlow = LoginFragmentDirections.actionGlobalMyTransportationsFragment()
+                findNavController().navigate(toMainFlow)
+            }
             LoginViewModel.AuthenticationState.UNAUTHENTICATED -> {
                 Log.w("login", "Пользователь не аутентифицирован")
-                Toast.makeText(context, "Пользователь не аутентифицирован", Toast.LENGTH_LONG).show()
             }
-
         }
     }
 
@@ -66,10 +67,6 @@ class LoginFragment : Fragment() {
 
     private fun handleLoading() {
         showProgressBar()
-    }
-
-    private fun navigateToMyTransportations() {
-        findNavController().navigate(R.id.action_loginFragment_to_myTransportationsFragment)
     }
 
     private fun showProgressBar() {

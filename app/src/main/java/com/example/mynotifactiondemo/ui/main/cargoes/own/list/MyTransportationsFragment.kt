@@ -1,13 +1,16 @@
-package com.example.mynotifactiondemo.ui.cargoes.own.list
+package com.example.mynotifactiondemo.ui.main.cargoes.own.list
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
@@ -15,7 +18,10 @@ import androidx.paging.map
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mynotifactiondemo.R
 import com.example.mynotifactiondemo.common.mapping.Mapper
+import com.example.mynotifactiondemo.ui.login.LoginFragmentDirections
+import com.example.mynotifactiondemo.viewmodel.LoginViewModel
 import com.example.mynotifactiondemo.viewmodel.MyTransportationsViewModel
+import com.example.mynotifactiondemo.viewmodel.model.ViewModelResult
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_my_transportations.*
 import kotlinx.coroutines.Job
@@ -27,6 +33,8 @@ import javax.inject.Inject
 class MyTransportationsFragment : Fragment() {
 
     @Inject lateinit var mapper: Mapper
+
+    private val loginViewModel: LoginViewModel by activityViewModels()
     private val myTransportationsViewModel: MyTransportationsViewModel by viewModels()
 
     private val adapter = MyTransportationsListAdapter( object: MyTransportationsListAdapter.OnListItemClickListener {
@@ -49,7 +57,21 @@ class MyTransportationsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initUI()
-        getMyTransportations()
+
+        loginViewModel.authenticationState.observe(viewLifecycleOwner, Observer { result ->
+            when (result.status) {
+                ViewModelResult.Status.SUCCESS -> {
+                    hideProgressBar()
+                    when (result.getValueOrNull()!!) {
+                        LoginViewModel.AuthenticationState.AUTHENTICATED -> getMyTransportations()
+                        LoginViewModel.AuthenticationState.UNAUTHENTICATED -> navigateToLoginFlow()
+                    }
+                }
+                ViewModelResult.Status.FAILURE -> navigateToLoginFlow()
+                ViewModelResult.Status.LOADING -> showProgressBar()
+            }
+        })
+
     }
 
     private fun initUI() {
@@ -106,5 +128,18 @@ class MyTransportationsFragment : Fragment() {
                 .filter { it.refresh is LoadState.NotLoading }
                 .collect { transportations_recycler_view.scrollToPosition(0) }
         }
+    }
+
+    fun showProgressBar() {
+        progress_bar.isVisible = true
+    }
+
+    fun hideProgressBar() {
+        progress_bar.isVisible = false
+    }
+
+    fun navigateToLoginFlow() {
+        val toLoginFlow = MyTransportationsFragmentDirections.actionMyTransportationsFragmentToLoginFlow()
+        findNavController().navigate(toLoginFlow)
     }
 }

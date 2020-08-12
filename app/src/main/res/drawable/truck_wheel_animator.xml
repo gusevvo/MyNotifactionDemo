@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:drawable="@drawable/ic_mo_truck_4"
+    tools:ignore="NewApi">
+    <target
+        android:name="wheel_1"
+        android:animation="@animator/rotation"
+        />
+    <target
+        android:name="wheel_2"
+        android:animation="@animator/rotation" />
+    <target
+        android:name="wheel_3"
+        android:animation="@animator/rotation" />
+    <target
+        android:name="wheel_4"
+        android:animation="@animator/rotation" />
+    <target
+        android:name="wheel_5"
+        android:animation="@animator/rotation" />
+</animated-vector>

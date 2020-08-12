@@ -9,9 +9,5 @@
             android:id="@+id/myTransportationsFragment"
             android:icon="@drawable/ic_own_cargoes"
             android:title="Мои перевозки" />
-        <item
-            android:id="@+id/nav_logout"
-            android:icon="@drawable/ic_logout"
-            android:title="Выйти" />
     </group>
 </menu>

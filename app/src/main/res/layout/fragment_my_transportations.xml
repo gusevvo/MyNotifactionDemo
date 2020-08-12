@@ -5,7 +5,7 @@
     android:id="@+id/fragment_cargoes_own_transportations_list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.cargoes.own.list.MyTransportationsFragment">
+    tools:context=".ui.main.cargoes.own.list.MyTransportationsFragment">
 
     <TextView
         android:id="@+id/fragment_cargoes_own_total_items_count"
