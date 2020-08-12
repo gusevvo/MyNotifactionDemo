@@ -184,7 +184,28 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/payment_due_date"
-                tools:valueText="Водитель должен знать на погрузке номер заказа! Номер заказа 6316487. Водителю обязательно при себе иметь светоотражающий жилет. Проверка опаллечивания паллет(4 слоя) Отметки о времени  прибытия/убытия на загрузке/выгрузке -ПРОСТАВЛЯТЬ ОБЯЗАТЕЛЕНО! ТС без крюков!  маска медицинская , перчатки, сиз"></com.example.mynotifactiondemo.ui.components.LabelValuePair>
+                tools:valueText="Водитель должен знать на погрузке номер заказа! Номер заказа 6316487. Водителю обязательно при себе иметь светоотражающий жилет. Проверка опаллечивания паллет(4 слоя) Отметки о времени  прибытия/убытия на загрузке/выгрузке -ПРОСТАВЛЯТЬ ОБЯЗАТЕЛЕНО! ТС без крюков!  маска медицинская , перчатки, сиз" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/verification_code"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/additional_requirements"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:hint="Введите код"
+                    android:inputType="number"
+                    android:maxLength="6"
+                    android:textAlignment="center" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:id="@+id/reject"
@@ -201,7 +222,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/accept"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/additional_requirements" />
+                app:layout_constraintTop_toBottomOf="@id/verification_code" />
 
             <Button
                 android:id="@+id/accept"
@@ -218,6 +239,21 @@
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/reject"
                 app:layout_constraintTop_toTopOf="@id/reject" />
+
+            <ProgressBar
+                android:id="@+id/accept_progress_bar"
+                style="?android:attr/progressBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="99dp"
+                android:indeterminate="true"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/accept"
+                app:layout_constraintEnd_toEndOf="@id/accept"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@id/accept"
+                app:layout_constraintTop_toTopOf="@id/accept"
+                tools:visibility="visible" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

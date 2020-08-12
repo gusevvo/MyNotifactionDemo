@@ -18,6 +18,11 @@ class MyTransportationViewModel @ViewModelInject constructor(
     val myTransportation: LiveData<ViewModelResult<MyTransportationResponseDto>>
         get() = _myTransportation
 
+
+    private val _verificationCodeRequested = MutableLiveData<ViewModelResult<Boolean>>()
+    val verificationCodeRequested: LiveData<ViewModelResult<Boolean>>
+        get() = _verificationCodeRequested
+
     private val _rejected = MutableLiveData<ViewModelResult<Boolean>>()
     val rejected: LiveData<ViewModelResult<Boolean>>
         get() = _rejected
@@ -35,6 +40,18 @@ class MyTransportationViewModel @ViewModelInject constructor(
                 _myTransportation.postValue(ViewModelResult.success(dto))
             } catch (throwable: Throwable) {
                 _myTransportation.postValue(ViewModelResult.failure(throwable))
+            }
+        }
+    }
+
+    fun requestVerificationCode(id: String, deviceToken: String) {
+        viewModelScope.launch {
+            _verificationCodeRequested.postValue(ViewModelResult.loading())
+            try {
+                myTransportationsRepository.requestVerificationCode(id, deviceToken)
+                _verificationCodeRequested.postValue(ViewModelResult.success(true))
+            } catch (throwable: Throwable) {
+                _verificationCodeRequested.postValue(ViewModelResult.failure(throwable))
             }
         }
     }

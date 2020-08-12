@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.trace
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
@@ -15,6 +16,8 @@ import com.example.mynotifactiondemo.common.mapping.Mapper
 import com.example.mynotifactiondemo.data.api.dto.MyTransportationResponseDto
 import com.example.mynotifactiondemo.viewmodel.MyTransportationViewModel
 import com.example.mynotifactiondemo.viewmodel.model.ViewModelResult
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.iid.FirebaseInstanceId
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.component_label_value_pair.view.*
 import kotlinx.android.synthetic.main.fragment_my_transportation_details.*
@@ -58,9 +61,59 @@ class MyTransportationDetailsFragment : Fragment() {
             }
         })
 
+        myTransportationViewModel.verificationCodeRequested.observe(viewLifecycleOwner, Observer { result ->
+            when (result.status) {
+                ViewModelResult.Status.SUCCESS -> {
+                    accept.isClickable = true
+                    accept_progress_bar.visibility = View.GONE
+                    verification_code.visibility = View.VISIBLE
+                    accept.text = "Подписать заявку"
+                }
+                ViewModelResult.Status.FAILURE ->{
+                    accept.isClickable = true
+                    accept_progress_bar.visibility = View.GONE
+                    verification_code.visibility = View.GONE
+                    accept.text = "Принять условия"
+
+                    val throwable = result.getFailureOrNull()!!.throwable
+                    Toast.makeText(context,throwable.message, Toast.LENGTH_LONG).show()
+                    Log.e("TransportationDetails", "Ошибка", throwable)
+                }
+                ViewModelResult.Status.LOADING -> {
+                    accept.isClickable = false
+                    accept_progress_bar.visibility = View.VISIBLE
+                    accept.text = ""
+                }
+            }
+        })
+
         reject.setOnClickListener { myTransportationViewModel.rejectMyTransportation(args.id) }
-        accept.setOnClickListener { myTransportationViewModel.acceptMyTransportation(args.id, "123456") }
+        accept.setOnClickListener { onAcceptButtonClick() }
     }
+
+    private fun onAcceptButtonClick() {
+
+        FirebaseInstanceId.getInstance().instanceId
+            .addOnCompleteListener(OnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    Toast.makeText(context, "Не удалось получить токен устройства", Toast.LENGTH_LONG).show()
+                    Log.e("firebase", "Не удалось получить токен устройства", task.exception)
+                    return@OnCompleteListener
+                }
+
+                val token = task.result?.token
+                if (token == null) {
+                    Toast.makeText(context, "Не удалось получить токен устройства", Toast.LENGTH_LONG).show()
+                    Log.e("firebase", "Не удалось получить токен устройства", task.exception)
+                    return@OnCompleteListener
+                }
+
+                Log.d("firebase", "Токен устройства: \"$token\"")
+                myTransportationViewModel.requestVerificationCode(args.id, token)
+            })
+    }
+//        myTransportationViewModel.acceptMyTransportation(args.id, "123456")
+
 
     private fun handleSuccess(myTransportation: MyTransportationResponseDto) {
         hideProgressBar()
@@ -82,6 +135,8 @@ class MyTransportationDetailsFragment : Fragment() {
         cost_without_vat.valueText.text = model.costWithoutVat
         payment_due_date.valueText.text = model.paymentDueDate
         additional_requirements.valueText.text = model.additionalRequirements
+
+        verification_code.visibility = View.GONE
     }
 
     private fun handleFailure(failure: ViewModelResult.Failure) {
