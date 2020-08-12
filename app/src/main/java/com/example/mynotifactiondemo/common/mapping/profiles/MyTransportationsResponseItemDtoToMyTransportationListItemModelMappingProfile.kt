@@ -11,15 +11,15 @@ class MyTransportationsResponseItemDtoToMyTransportationListItemModelMappingProf
     override fun map(source: MyTransportationsResponseItemDto) =
         MyTransportationsListItemModel(
             id = source.id,
-            numberAndStatusChangeDate = "${source.number} от ${source.statusChangeTime}",
+            numberAndStatusChangeDate = "${source.number} от ${Format.Date(source.statusChangeTime)}",
             statusText = source.status.toStatusText(),
             statusTextColor = source.status.toStatusColor(),
-            cost = source.tariffWithVat.toString(),
-            costWithoutVat = source.tariff.toString(),
+            cost = Format.Currency(source.tariffWithVat),
+            costWithoutVat = Format.Currency(source.tariff),
             cityLoading = source.cityLoading,
             cityUnloading = source.cityUnloading,
-            dateLoading = source.dateLoading,
-            dateUnloading = source.dateUnloading,
+            dateLoading = Format.Date(source.dateLoading),
+            dateUnloading = Format.Date(source.dateUnloading),
             routeNodesCount = source.routeNodesCount
         )
 }
