@@ -19,15 +19,18 @@ class LoginViewModel @ViewModelInject constructor(
     private val _authenticationState = MutableLiveData<ViewModelResult<AuthenticationState>>()
     val authenticationState: LiveData<ViewModelResult<AuthenticationState>>
         get() = _authenticationState
-
-    val user: LiveData<ViewModelResult<UserResponseDto>> = liveData {
-        emit(ViewModelResult.loading())
-        try {
-            emit(ViewModelResult.success(usersRepository.getUser()))
-        } catch(throwable: Throwable) {
-            emit(ViewModelResult.failure(throwable))
-        }
-    }
+//
+//    val user: LiveData<ViewModelResult<UserResponseDto>> = liveData {
+//        emit(ViewModelResult.loading())
+//        try {
+//            emit(ViewModelResult.success(usersRepository.getUser()))
+//        } catch(throwable: Throwable) {
+//            emit(ViewModelResult.failure(throwable))
+//        }
+//    }
+    private val _user = MutableLiveData<ViewModelResult<UserResponseDto>>()
+    val user: LiveData<ViewModelResult<UserResponseDto>>
+        get() = _user
 
     init {
         try {
@@ -61,6 +64,18 @@ class LoginViewModel @ViewModelInject constructor(
                 _authenticationState.postValue(ViewModelResult.success(AuthenticationState.UNAUTHENTICATED))
             } catch (throwable: Throwable) {
                 _authenticationState.postValue(ViewModelResult.failure(throwable))
+            }
+        }
+    }
+
+    fun getUser() {
+        viewModelScope.launch {
+            _user.postValue(ViewModelResult.loading())
+            try {
+                val dto = usersRepository.getUser()
+                _user.postValue(ViewModelResult.success(dto))
+            } catch (throwable: Throwable) {
+                _user.postValue(ViewModelResult.failure(throwable))
             }
         }
     }
