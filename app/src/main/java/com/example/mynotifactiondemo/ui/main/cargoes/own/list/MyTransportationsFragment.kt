@@ -1,7 +1,6 @@
 package com.example.mynotifactiondemo.ui.main.cargoes.own.list
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -18,7 +17,6 @@ import androidx.paging.map
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mynotifactiondemo.R
 import com.example.mynotifactiondemo.common.mapping.Mapper
-import com.example.mynotifactiondemo.ui.login.LoginFragmentDirections
 import com.example.mynotifactiondemo.viewmodel.LoginViewModel
 import com.example.mynotifactiondemo.viewmodel.MyTransportationsViewModel
 import com.example.mynotifactiondemo.viewmodel.model.ViewModelResult

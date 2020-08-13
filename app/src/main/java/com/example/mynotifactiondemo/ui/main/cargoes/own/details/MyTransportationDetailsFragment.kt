@@ -7,8 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.mynotifactiondemo.R
 import com.example.mynotifactiondemo.common.mapping.Mapper
@@ -27,7 +28,7 @@ class MyTransportationDetailsFragment : Fragment() {
     @Inject
     lateinit var mapper: Mapper
     private val args: MyTransportationDetailsFragmentArgs by navArgs()
-    private val myTransportationViewModel: MyTransportationViewModel by viewModels()
+    private val myTransportationViewModel: MyTransportationViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -65,14 +66,12 @@ class MyTransportationDetailsFragment : Fragment() {
                 ViewModelResult.Status.SUCCESS -> {
                     accept.isClickable = true
                     accept_progress_bar.visibility = View.GONE
-                    verification_code_layout.visibility = View.VISIBLE
                     accept.text = "Подписать заявку"
                 }
                 ViewModelResult.Status.FAILURE ->{
                     accept.isClickable = true
                     accept_progress_bar.visibility = View.GONE
-                    verification_code_layout.visibility = View.GONE
-                    accept.text = "Принять условия"
+                    accept.text = "Подписать заявку"
 
                     val throwable = result.getFailureOrNull()!!.throwable
                     Toast.makeText(context,throwable.message, Toast.LENGTH_LONG).show()
@@ -91,13 +90,6 @@ class MyTransportationDetailsFragment : Fragment() {
     }
 
     private fun onAcceptButtonClick() {
-//        val verificationCode = verification_code_input.text.toString()
-//        val isAcceptFlow =  !verificationCode.isNullOrBlank()
-//
-//        if (isAcceptFlow) {
-//            myTransportationViewModel.acceptMyTransportation(args.id, verificationCode)
-//            return
-//        }
 
         FirebaseInstanceId.getInstance().instanceId
             .addOnCompleteListener(OnCompleteListener { task ->
@@ -116,10 +108,10 @@ class MyTransportationDetailsFragment : Fragment() {
 
                 Log.d("firebase", "Токен устройства: \"$token\"")
                 myTransportationViewModel.requestVerificationCode(args.id, token)
+                val toVerificationDialog = MyTransportationDetailsFragmentDirections.actionMyTransportationDetailsFragmentToVerificationCodeFragment(args.id)
+                findNavController().navigate(toVerificationDialog)
             })
     }
-//        myTransportationViewModel.acceptMyTransportation(args.id, "123456")
-
 
     private fun handleSuccess(myTransportation: MyTransportationResponseDto) {
         hideProgressBar()
@@ -141,8 +133,6 @@ class MyTransportationDetailsFragment : Fragment() {
         cost_without_vat.valueText.text = model.costWithoutVat
         payment_due_date.valueText.text = model.paymentDueDate
         additional_requirements.valueText.text = model.additionalRequirements
-
-        verification_code_layout.visibility = View.GONE
     }
 
     private fun handleFailure(failure: ViewModelResult.Failure) {
