@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:context=".ui.main.cargoes.own.details.VerificationCodeFragment"
+    style="@style/MaterialAlertDialog.MaterialComponents">
+
+    <TextView
+        android:id="@+id/title"
+        style="@style/h1_primary_dark"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:text="Введите код подтверждения"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/label"
+        style="@style/h5_primary_dark"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Код подтверждения"
+        app:layout_constraintEnd_toEndOf="@+id/title"
+        app:layout_constraintStart_toStartOf="@+id/title"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/verificationCodeInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/label"
+        app:layout_constraintTop_toBottomOf="@+id/label">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/verificationCodeInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint=""
+            android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/requestAgainButton"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Запросить повторно"
+        app:layout_constraintEnd_toEndOf="@+id/verificationCodeInputLayout"
+        app:layout_constraintStart_toStartOf="@+id/verificationCodeInputLayout"
+        app:layout_constraintTop_toBottomOf="@+id/verificationCodeInputLayout" />
+
+    <Button
+        android:id="@+id/cancelButton"
+        style="@style/negative_button"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Отмена"
+        app:layout_constraintEnd_toEndOf="@+id/requestAgainButton"
+        app:layout_constraintStart_toStartOf="@+id/requestAgainButton"
+        app:layout_constraintTop_toBottomOf="@+id/requestAgainButton" />
+
+    <Button
+        android:id="@+id/signButton"
+        style="@style/positive_button"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:text="Подписать заявку"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/cancelButton"
+        app:layout_constraintStart_toStartOf="@+id/cancelButton"
+        app:layout_constraintTop_toBottomOf="@+id/cancelButton" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
